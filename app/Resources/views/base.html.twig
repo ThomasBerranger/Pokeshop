@@ -5,9 +5,17 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.min.css') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
     </body>
 </html>
