@@ -1,4 +1,4 @@
-Symfony Standard Edition
+Pokeshop
 ========================
 
  * I'll explain you later 😲
