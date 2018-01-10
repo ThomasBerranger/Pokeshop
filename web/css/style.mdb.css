@@ -12,8 +12,9 @@
     background-color: #4285F4;
 }
 
-@media only screen and (max-width: 768px) {
-    .navbar {
-        background-color: #4285F4;
-    }
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 2px solid white;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
 }

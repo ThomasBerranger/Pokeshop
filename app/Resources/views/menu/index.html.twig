@@ -1,27 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <br><br><br>
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Welcome to</span> 
-                Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="height: 2000px; background-color: whitesmoke">
+                time to design
             </div>
-            <div>
-                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                <button type="button" class="btn btn-primary">Primary</button>
-
-                <!-- Default button -->
-                <button type="button" class="btn btn-default">Default</button>
-
-                <!-- Secondary button -->
-                <button type="button" class="btn btn-secondary">Secondary</button>
-
-                <!-- Indicates a successful or positive action -->
-                <button type="button" class="btn btn-success">Success</button>
-            </div>
-
         </div>
     </div>
 {% endblock %}
