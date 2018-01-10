@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="full-height">
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <title>{% block title %}{{ title }}{% endblock %}</title>
+
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+
+
+        <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0/css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.mdb.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Quicksand:300,400,500,700" rel="stylesheet">
+
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+        {{ include('elements/header.html.twig') }}
+
+        {% block body %}
+        {% endblock %}
+
         {% block javascripts %}{% endblock %}
+
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app.mdb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+
     </body>
 </html>
