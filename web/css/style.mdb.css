@@ -6,12 +6,12 @@
 .navbar {
     background-color: transparent;
     font-size: 30px;
+    z-index: 5;
 }
 
 .top-nav-collapse {
     background-color: #4285F4;
 }
-
 
 .input-group.md-form.form-sm.form-2 input {
     border: 2px solid white;

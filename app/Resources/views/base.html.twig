@@ -18,13 +18,20 @@
 </head>
 <body>
 
+
 <div class="container-fluid p-0">
     {{ include('elements/header.html.twig') }}
 </div>
 
-<div class="container">
+
+<div class="container-fluid p-5">
     {% block body %}
     {% endblock %}
+</div>
+
+
+<div class="container-fluid">
+    {{ include('elements/footer.html.twig') }}
 </div>
 
 

@@ -3,16 +3,85 @@
 {% block body %}
     <div class="row">
 
-        <div class="col-md-3 sticky-top" style="height: 1000px;">
-            <div class="row" style="height: 300px; background-color: rebeccapurple"></div>
+        <div class="col-md-12 col-lg-3 sticky-top sticky-left" style="height: 1000px;">
+
+            <div class="row" style="height: 300px;">
+
+                <ul class="list-group w-75 font-quicksand" style="margin: auto">
+                    <li class="list-group-item text-justify text-center">
+                        <dt>Types :</dt>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
+                        <dt>Eau</dt>
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
+                        <dt>Feu</dt>
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center disabled">
+                        <dt>Legendaire</dt>
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul>
+
+            </div>
+
             <div class="row" style="height: 200px; background-color: darkred"></div>
         </div>
 
-        <div class="col-md-9" style="height: 2000px; background-color: #0d5bdd">
+        <div class="col-md-12 col-lg-9">
 
             <div class="row">
-                <div class="col-md-12" style="height: 500px; background-color: #00bcd4"></div>
-                <div class="col-md-12" style="height: 1000px; background-color: #00e25b">
+                <div class="col-md-12 p-5">
+                    <!--Card-->
+                    <div class="card card-cascade wider reverse">
+
+                        <!--Card image-->
+                        <div class="view overlay hm-white-slight">
+                            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="img-fluid">
+                            <a href="#!">
+                                <div class="mask"></div>
+                            </a>
+                        </div>
+                        <!--/Card image-->
+
+                        <!--Card content-->
+                        <div class="card-body text-center font-quicksand">
+                            <!--Title-->
+                            <h4 class="card-title"><strong>Jean Jacq Pokemon</strong></h4>
+
+                            <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                            </p>
+
+                            <div class="row">
+                                <div class="offset-3 col-md-2 text-center">
+                                    <h5 class="h5-responsive blue-text">5
+                                        <br>
+                                        <span>En stock</span>
+                                    </h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5 class="h5-responsive red-text">2
+                                        <br>
+                                        <span>Vendu</span>
+                                    </h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5 class="h5-responsive green-text">1
+                                        <br>
+                                        <span>En vente</span>
+                                    </h5>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--/.Card content-->
+
+                    </div>
+                    <!--/.Card-->
+                </div>
+                <div class="col-md-12" style="height: 2000px; background-color: #00e25b">
 
                     <div class="row">
                         <div class="col-md-6" style="height: 400px; background-color: brown; border: black solid 3px"></div>

@@ -13,3 +13,15 @@
     }
 }
 
+.sticky-left {
+    top: 100px;
+    z-index: 1;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+li.cursor-pointer:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
