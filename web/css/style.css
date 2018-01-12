@@ -42,3 +42,11 @@ li.cursor-pointer:hover {
 .hover-effect:hover {
     opacity: 0.7;
 }
+
+.margin-auto {
+    margin: auto;
+}
+
+.article-table {
+    margin: 5% auto 20px auto;
+}
