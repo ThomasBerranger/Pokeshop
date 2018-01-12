@@ -4,50 +4,56 @@
 
     <div class="w-100 view-security">
 
-        <div class="container">
+        <div class="container font-quicksand">
             <div class="row">
                 <div class="col-md-6 margin-auto p-5">
                     <!--Panel-->
                     <div class="card">
-                        <div class="card-header primary-color lighten-1 white-text text-center h4-responsive">
-                            Sign in <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <div class="card-header success-color lighten-1 white-text text-center h4-responsive">
+                            Sign up <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </div>
+
                         <div class="card-body">
-                            <!-- Form login -->
-                            <form action="{{ path('login') }}" method="post">
 
-                                {% if error %}
-                                    <p class="h5 text-center mb-4">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-                                {% endif %}
+                            {{ form_start(form) }}
 
-                                <div class="md-form">
-                                    <i class="fa fa-envelope prefix grey-text"></i>
-                                    <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" />
-                                    <label for="username">Username or Email :</label>
-                                </div>
+                            <div class="md-form">
+                                {{ form_row(form.username) }}
+                            </div>
+                            <div class="md-form">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="md-form">
+                                {{ form_row(form.plainPassword.first) }}
+                            </div>
+                            <div class="md-form">
+                                {{ form_row(form.plainPassword.second) }}
+                            </div>
+                            <div class="md-form">
+                                {{ form_row(form.termsAccepted) }}
+                            </div>
 
-                                <div class="md-form">
-                                    <i class="fa fa-lock prefix grey-text"></i>
-                                    <input type="password" id="password" name="_password" class="form-control" />
-                                    <label for="password">Password</label>
-                                </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Register</button>
+                            </div>
 
-                                <div class="text-center">
-                                    <button class="btn btn-primary" type="submit">Login</button>
-                                </div>
-                            </form>
+                            {{ form_end(form) }}
+
                             <hr>
-                            <h5 class="h5-responsive pull-right">Not a member yet ? <a href="#">Sign up</a></h5>
+                            <h5 class="pull-right h5-responsive">Already a member ? <a href="{{ path('login') }}">Sign in</a></h5>
+
                         </div>
+
                     </div>
-                    <!--/.Panel-->
                 </div>
+                <!--/.Panel-->
             </div>
         </div>
+    </div>
 
     </div>
 
 {% endblock %}
 
-{% block stylesheets %}
-{% endblock %}
+    {% block stylesheets %}
+    {% endblock %}

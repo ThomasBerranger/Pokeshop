@@ -11,7 +11,7 @@ class ArticleController extends Controller
     /**
      * @Route("/article/list", name="article_list")
      */
-    public function indexAction(Request $request)
+    public function listAction(Request $request)
     {
         return $this->render('article/list.html.twig');
     }

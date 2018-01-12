@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\Tests\Service;
@@ -15,7 +16,7 @@ class SecurityController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request, AuthenticationUtils $authUtils)
+    public function loginAction(Request $request, AuthenticationUtils $authUtils)
     {
         // get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
@@ -30,4 +31,35 @@ class SecurityController extends Controller
     }
 
 
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render(
+            'security/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
 }
