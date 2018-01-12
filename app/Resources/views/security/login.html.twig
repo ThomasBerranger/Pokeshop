@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/security-style.css') }}" />
+{% endblock %}
+
+
 {% block body %}
 
-    <div class="w-100 view-security">
+    <div class="w-100">
 
         <div class="container font-quicksand">
             <div class="row">
@@ -49,5 +55,3 @@
 
 {% endblock %}
 
-{% block stylesheets %}
-{% endblock %}

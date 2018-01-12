@@ -46,9 +46,15 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(name="money", type="integer")
+     */
+    private $money;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->money = 100;
     }
 
     public function getUsername()
@@ -191,5 +197,29 @@ class User implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set money
+     *
+     * @param integer $money
+     *
+     * @return User
+     */
+    public function setMoney($money)
+    {
+        $this->money = $money;
+
+        return $this;
+    }
+
+    /**
+     * Get money
+     *
+     * @return integer
+     */
+    public function getMoney()
+    {
+        return $this->money;
     }
 }

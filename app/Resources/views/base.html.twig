@@ -5,15 +5,14 @@
 
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
-    {% block stylesheets %}{% endblock %}
-
-
     <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.mdb.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Quicksand:300,400,500,700" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
 
 </head>
 <body>
