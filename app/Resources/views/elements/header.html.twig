@@ -1,48 +1,52 @@
-<!--Main Navigation-->
-<header>
+{% if app.user.username is defined %}
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar font-quicksand">
-        <div class="container">
-            <a class="navbar-brand h3-responsive" href="{{ path('homepage') }}"><strong><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ title }}</strong></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('article_list') }}"> <i class="fa fa-list-ul screen-dsiplay" aria-hidden="true"></i> List <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"> <i class="fa fa-shopping-basket screen-dsiplay" aria-hidden="true"></i> Basket </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"> <i class="fa fa-user screen-dsiplay" aria-hidden="true"></i> Profile</a>
-                    </li>
-                </ul>
-                <form class="form-inline ml-auto">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                    <button href="#!" class="btn btn-outline-white btn-md my-0" type="submit"><i class="fa fa-search fa-3x" aria-hidden="true"></i></button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    <!--Main Navigation-->
+    <header>
 
-
-    {% if homeNavbar is defined %}
-        <div class="view intro hm-purple-light">
-            <div class="full-bg-img flex-center">
-                <div class="container text-center white-text fadeInDownBig animated">
-                    <h2 class="font-quicksand h2-responsive">This Navbar is fixed and transparent</h2>
-                    <br>
-                    <h5 class="font-didact h5-responsive">It will always stay visible on the top, even when you scroll down</h5>
-                    <div class="divider-new font-quicksand h5-responsive">Let's buy them all !</div>
-                    <a href="#" role="button" class="btn btn-primary">Click here</a>
-                    <a href="#" role="button" class="btn btn-secondary">Click here</a>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar font-quicksand">
+            <div class="container">
+                <a class="navbar-brand h3-responsive" href="{{ path('homepage') }}"><strong><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ title }}</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('article_list') }}"> <i class="fa fa-list-ul screen-dsiplay" aria-hidden="true"></i> List <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> <i class="fa fa-shopping-basket screen-dsiplay" aria-hidden="true"></i> Basket </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> <i class="fa fa-user screen-dsiplay" aria-hidden="true"></i> {{ app.user.username }}</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline ml-auto">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                        <button href="#!" class="btn btn-outline-white btn-md my-0" type="submit"><i class="fa fa-search fa-3x" aria-hidden="true"></i></button>
+                    </form>
                 </div>
             </div>
-        </div>
-    {% endif %}
+        </nav>
 
 
-</header>
-<!--Main Navigation-->
+        {% if homeNavbar is defined %}
+            <div class="view intro hm-purple-light">
+                <div class="full-bg-img flex-center">
+                    <div class="container text-center white-text fadeInDownBig animated">
+                        <h2 class="font-quicksand h2-responsive">This Navbar is fixed and transparent</h2>
+                        <br>
+                        <h5 class="font-didact h5-responsive">It will always stay visible on the top, even when you scroll down</h5>
+                        <div class="divider-new font-quicksand h5-responsive">Let's buy them all !</div>
+                        <a href="#" role="button" class="btn btn-primary">Click here</a>
+                        <a href="#" role="button" class="btn btn-secondary">Click here</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+    </header>
+    <!--Main Navigation-->
+
+{% endif %}
