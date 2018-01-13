@@ -45,6 +45,18 @@ class SecurityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
 
+            $picture = $user->getPicture();
+            if ( $picture )
+            {
+                $pictureName = md5(uniqid()).'.'.$picture->guessExtension();
+                $picture->move(
+                    $this->getParameter('pictures_directory'),
+                    $pictureName
+                );
+                $user->setPicture($pictureName);
+            }
+
+
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 

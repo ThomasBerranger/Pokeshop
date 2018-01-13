@@ -18,7 +18,7 @@
                             <a class="nav-link" href="#"> <i class="fa fa-shopping-basket screen-dsiplay" aria-hidden="true"></i> Basket </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"> <i class="fa fa-user screen-dsiplay" aria-hidden="true"></i> {{ app.user.username }}</a>
+                            <a class="nav-link" href="{{ path('article_list', {'id': app.user.id}) }}"> <i class="fa fa-user screen-dsiplay" aria-hidden="true"></i> {{ app.user.username }}</a>
                         </li>
                     </ul>
                     <form class="form-inline ml-auto">

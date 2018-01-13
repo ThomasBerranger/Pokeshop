@@ -6,6 +6,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -35,6 +36,11 @@ class UserType extends AbstractType
                 'second_options' => array('label' => 'Repeat Password'),
                 'options' => array('attr' => array('class' => 'form-control'))
             ))
+            ->add('picture', FileType::class, array(
+                    'label' => 'Picture (png, jpg, jpeg and gif file)',
+                    'required'=>false
+                )
+            )
             ->add('termsAccepted', CheckboxType::class, array(
                 'mapped' => false,
                 'constraints' => new IsTrue(),

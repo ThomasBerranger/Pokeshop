@@ -51,6 +51,19 @@ class User implements UserInterface, \Serializable
      */
     private $money;
 
+    /**
+     * @ORM\Column(name="picture", type="string", nullable=true)
+     *
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Non valid file format",
+     *     uploadIniSizeErrorMessage = "To huge file",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     * )
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -221,5 +234,29 @@ class User implements UserInterface, \Serializable
     public function getMoney()
     {
         return $this->money;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return User
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }
