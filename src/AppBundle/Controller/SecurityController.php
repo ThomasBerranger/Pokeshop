@@ -50,7 +50,7 @@ class SecurityController extends Controller
             {
                 $pictureName = md5(uniqid()).'.'.$picture->guessExtension();
                 $picture->move(
-                    $this->getParameter('pictures_directory'),
+                    $this->getParameter('users_pictures_directory'),
                     $pictureName
                 );
                 $user->setPicture($pictureName);
