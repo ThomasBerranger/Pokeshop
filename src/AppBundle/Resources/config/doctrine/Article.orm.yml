@@ -1,0 +1,37 @@
+AppBundle\Entity\Article:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ArticleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: integer
+        name:
+            type: string
+            length: '20'
+        weight:
+            type: float
+            nullable: true
+        size:
+            type: float
+            nullable: true
+        gender:
+            type: boolean
+            nullable: true
+        price:
+            type: float
+        color:
+            type: string
+            length: '20'
+        state:
+            type: integer
+        description:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }

@@ -63,10 +63,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <h1>{{ app.user.username }}</h1>
                     <h1>{{ app.user.email }}</h1>
-                    <img src="{{ asset('uploads/users_pictures/'~app.user.picture) }}" alt="{{ app.user.picture }}">
+                    <img src="{{ asset('uploads/users_pictures/'~app.user.picture) }}" alt="{{ app.user.picture }}" class="img-fluid">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
