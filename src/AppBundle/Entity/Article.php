@@ -22,12 +22,14 @@ class Article
      */
     private $id;
 
+
     /**
      * @var int
      *
      * @ORM\Column(name="number", type="integer")
      */
     private $number;
+
 
     /**
      * @var string
@@ -78,16 +80,18 @@ class Article
     private $price;
 
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
 
     }
 
-
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -111,7 +115,7 @@ class Article
     /**
      * Get number
      *
-     * @return int
+     * @return integer
      */
     public function getNumber()
     {

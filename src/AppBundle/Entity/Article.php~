@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,12 +25,14 @@ class Article
      */
     private $id;
 
+
     /**
      * @var int
      *
      * @ORM\Column(name="number", type="integer")
      */
     private $number;
+
 
     /**
      * @var string
@@ -79,133 +84,10 @@ class Article
 
 
     /**
-     * Get id
-     *
-     * @return int
+     * Constructor
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
-    }
 
-    /**
-     * Set number
-     *
-     * @param integer $number
-     *
-     * @return Article
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    /**
-     * Get number
-     *
-     * @return int
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Article
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set size
-     *
-     * @param float $size
-     *
-     * @return Article
-     */
-    public function setSize($size)
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
-     * Get size
-     *
-     * @return float
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
-     * Set weight
-     *
-     * @param float $weight
-     *
-     * @return Article
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
-    /**
-     * Get weight
-     *
-     * @return float
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Article
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 }
-

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Service\PokeApi;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,15 @@ class ArticleController extends Controller
      */
     public function listAction(Request $request)
     {
-        return $this->render('article/list.html.twig');
+        /** @var PokeApi $pokeApi */
+        $pokeApi = $this->get(PokeApi::class);
+        $data = $pokeApi->getPokeInfo(1);
+        $parsedData = $pokeApi->parseResult($data);
+
+        dump($parsedData);
+
+        return $this->render('article/list.html.twig', [
+            'data' => $parsedData
+        ]);
     }
 }
