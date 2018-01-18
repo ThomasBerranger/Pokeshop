@@ -78,12 +78,6 @@ class Article
     private $price;
 
 
-    public function __construct()
-    {
-
-    }
-
-
     /**
      * Get id
      *
@@ -213,52 +207,5 @@ class Article
     {
         return $this->description;
     }
-
-    /**
-     * Set picture
-     *
-     * @param string $picture
-     *
-     * @return Article
-     */
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return string
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     *
-     * @return Article
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
 }
+
