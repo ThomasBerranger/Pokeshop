@@ -37,7 +37,7 @@ class UserType extends AbstractType
                 'options' => array('attr' => array('class' => 'form-control'))
             ))
             ->add('picture', FileType::class, array(
-                    'label' => 'Picture (png, jpg, jpeg and gif file)',
+                    'label' => false,
                     'required'=>false
                 )
             )

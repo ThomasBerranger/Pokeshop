@@ -30,20 +30,24 @@
                             <thead class="font-didact font-up">
                             <tr>
                                 <th class="h4-responsive font-weight-bold">#</th>
-                                <th class="h4-responsive font-weight-bold">{{ data.name }}</th>
+                                <th class="h4-responsive font-weight-bold">Picture</th>
                                 <th class="h4-responsive font-weight-bold">First Name</th>
                                 <th class="h4-responsive font-weight-bold">Username</th>
                             </tr>
                             </thead>
                             <tbody class="cursor-pointer align-middle">
-                            <tr onclick="location.href='#table'">
-                                <th class="align-middle h5-responsive" scope="row">1</th>
-                                <td class="align-middle h5-responsive">
-                                    <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="#" style="max-height: 80px">
-                                </td>
-                                <td class="align-middle h5-responsive">Otto</td>
-                                <td class="align-middle h5-responsive">@mdo</td>
-                            </tr>
+
+                                {% for pokemon in data.results %}
+                                <tr onclick="location.href='#table'">
+                                    <th class="align-middle h5-responsive" scope="row">1</th>
+                                    <td class="align-middle h5-responsive">
+                                        <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="#" style="max-height: 80px">
+                                    </td>
+                                    <td class="align-middle h5-responsive">{{ pokemon.name }}</td>
+                                    <td class="align-middle h5-responsive">@mdo</td>
+                                </tr>
+                                {% endfor %}
+
                             </tbody>
                         </table>
 

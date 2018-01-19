@@ -22,14 +22,12 @@ class Article
      */
     private $id;
 
-
     /**
      * @var int
      *
      * @ORM\Column(name="number", type="integer")
      */
     private $number;
-
 
     /**
      * @var string
@@ -78,6 +76,13 @@ class Article
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="owner", type="string", length=255)
+     */
+    private $owner;
 
 
     /**
@@ -264,5 +269,29 @@ class Article
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param string $owner
+     *
+     * @return Article
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return string
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }

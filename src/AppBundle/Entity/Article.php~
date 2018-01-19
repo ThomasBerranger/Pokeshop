@@ -3,9 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\ManyToMany;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,14 +22,12 @@ class Article
      */
     private $id;
 
-
     /**
      * @var int
      *
      * @ORM\Column(name="number", type="integer")
      */
     private $number;
-
 
     /**
      * @var string
@@ -81,6 +76,13 @@ class Article
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="owner", type="string", length=255)
+     */
+    private $owner;
 
 
     /**
