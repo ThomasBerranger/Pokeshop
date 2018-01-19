@@ -14,8 +14,9 @@
 }
 
 .sticky-left {
-    top: 100px;
+    top: 150px;
     z-index: 1;
+    height: 100px;
 }
 
 .cursor-pointer {
@@ -49,4 +50,21 @@ li.cursor-pointer:hover {
 
 .article-table {
     margin: 5% auto 20px auto;
+}
+
+.btn-size {
+    font-size: 15px;
+}
+
+.types_favorites_small {
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .types_favorites_large {
+        display: none;
+    }
+    .types_favorites_small {
+        display: block;
+    }
 }

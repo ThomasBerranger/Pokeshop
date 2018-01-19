@@ -3,9 +3,77 @@
 {% block body %}
 
     <div class="container-fluid p-5">
+
+        <div class="row types_favorites_small">
+            <div class="col-md-12 text-center">
+                <p>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#types" aria-expanded="false" aria-controls="collapseExample">
+                        Types
+                    </a>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#favorites" aria-expanded="false" aria-controls="collapseExample">
+                        Favorites
+                    </a>
+                </p>
+                <div class="collapse" id="types">
+                    <ul class="list-group w-75 font-quicksand" style="margin: auto">
+                        <li class="list-group-item text-justify text-center h5-responsive">
+                            <dt>Types :</dt>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
+                            <dt>Eau</dt>
+                            <span class="badge badge-primary badge-pill">14</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
+                            <dt>Feu</dt>
+                            <span class="badge badge-primary badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
+                            <dt>Plante</dt>
+                            <span class="badge badge-primary badge-pill">6</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
+                            <dt>Dragon</dt>
+                            <span class="badge badge-primary badge-pill">0</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center disabled">
+                            <dt>Legendaire</dt>
+                            <span class="badge badge-primary badge-pill">1</span>
+                        </li>
+                    </ul>
+                    <br><br>
+                </div>
+                <div class="collapse" id="favorites">
+                    <ul class="list-group w-75 font-quicksand" style="margin: auto">
+                        <li class="list-group-item text-justify text-center h5-responsive">
+                            <dt>Most favorite :</dt>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
+                            <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="..." height="60px">
+                            <dt>Salamèche</dt>
+                            <span class="badge badge-primary warning-color-dark badge-pill">5 <i class="fa fa-star" aria-hidden="true"></i></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
+                            <img src="http://pokelyris.livehost.fr/theme/ToonCraft/img/bulbizar.png" alt="..." height="60px">
+                            <dt>Bulbizarre</dt>
+                            <span class="badge badge-primary warning-color-dark badge-pill">3 <i class="fa fa-star" aria-hidden="true"></i></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
+                            <img src="https://www.papyswarriors.com/medias/album/7-carapuce.png" alt="..." height="60px">
+                            <dt>Carapuce</dt>
+                            <span class="badge badge-primary warning-color-dark badge-pill">2 <i class="fa fa-star" aria-hidden="true"></i></span>
+                        </li>
+                    </ul>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <div class="row">
 
-            <div class="col-md-12 col-lg-3 sticky-top sticky-left" style="height: 1000px;">
+            <div class="col-md-12 col-lg-3 sticky-top sticky-left types_favorites_large">
 
                 <div class="row">
                     <ul class="list-group w-75 font-quicksand" style="margin: auto">

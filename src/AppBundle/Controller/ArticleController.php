@@ -32,7 +32,7 @@ class ArticleController extends Controller
         dump($databaseOnePokemon);
 
 
-        $data = $pokeApi->getPokeEvolveChainUrl(33);
+        $data = $pokeApi->getPokeEvolveChainUrl(12);
         $parsedData = $pokeApi->parseResultEvolutionChain($data);
 
         dump($parsedData);die;

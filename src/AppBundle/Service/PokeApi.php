@@ -68,12 +68,14 @@ class PokeApi
 
     public function parseResultEvolutionChain($data)
     {
+        $evolution2Names = [];
+        $evolution3Names = [];
+
         if (isset($data['chain']['evolves_to'][0]['species']['name']))
         {
-            $evolution2Names = [];
-            foreach ($data['chain']['evolves_to'][0] as $evolution2)
+            foreach ($data['chain']['evolves_to'] as $evolution2)
             {
-                array_push($evolution2Names, $evolution2);
+                array_push($evolution2Names, $evolution2['species']['name']);
             }
         }
         else
@@ -83,7 +85,6 @@ class PokeApi
 
         if (isset($data['chain']['evolves_to'][0]['evolves_to']))
         {
-            $evolution3Names = [];
             foreach ($data['chain']['evolves_to'][0]['evolves_to'] as $evolution3) {
                 array_push($evolution3Names, $evolution3['species']['name']);
             }

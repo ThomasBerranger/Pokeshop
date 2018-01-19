@@ -4,7 +4,7 @@
     <header>
 
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar font-quicksand">
-            <div class="container">
+            <div class="container-fluid m-1">
                 <a class="navbar-brand h3-responsive" href="{{ path('homepage') }}"><strong><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ title }}</strong></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,8 +38,8 @@
                         <br>
                         <h5 class="font-didact h5-responsive">It will always stay visible on the top, even when you scroll down</h5>
                         <div class="divider-new font-quicksand h5-responsive">Let's buy them all !</div>
-                        <a href="{{ path('article_add') }}" role="button" class="btn btn-primary">Sale your pokemon here</a>
-                        <a href="#" role="button" class="btn btn-secondary">Click here</a>
+                        <a href="{{ path('article_add') }}" role="button" class="btn btn-primary font-quicksand btn-size">Sale your pokemon here</a>
+                        <a href="#" role="button" class="btn btn-secondary font-quicksand btn-size">See all that we have</a>
                     </div>
                 </div>
             </div>
@@ -68,9 +68,9 @@
                     <h1>{{ app.user.email }}</h1>
                     <img src="{{ asset('uploads/users_pictures/'~app.user.picture) }}" alt="{{ app.user.picture }}" class="img-fluid">
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer margin-auto">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <a role="button" href="{{ path('logout') }}" class="btn btn-primary"> <i class="fa fa-sign-out"></i> Logout</a>
                 </div>
             </div>
         </div>
