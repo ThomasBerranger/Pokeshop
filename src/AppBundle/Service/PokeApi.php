@@ -21,7 +21,7 @@ class PokeApi
         $this->apiUrl = 'http://pokeapi.co/api/v2/';
         $this->pokeUrl = $this->apiUrl.'pokemon/';
         $this->pokeEvolveChainUrl = $this->apiUrl.'evolution-chain/';
-        $this->allPokeUrl = $this->apiUrl.'pokemon/?limit=150&offset=0';
+        $this->allPokeUrl = $this->apiUrl.'pokemon/?limit=493&offset=0';
     }
 
 
@@ -51,18 +51,24 @@ class PokeApi
 
     public function parseResultOnePokemon($data)
     {
-        /*
-        dump($data);
-        $abilities = [];
-        foreach ($data['abilities'] as $ability) {
-            $abilities[] = $ability['ability']['name'];
-        }*/
+        $type1 = [];
+        $type2 = [];
+
+        if (isset($data['types'][0]['type']['name']))
+        {
+            $type1 = $data['types'][0]['type']['name'];
+        }
+
+        if (isset($data['types'][1]['type']['name']))
+        {
+            $type2 = $data['types'][1]['type']['name'];
+        }
 
         return [
             'name' => $data['name'],
             'id' => $data['id'],
-            'type1' => $data['types'][0]['type']['name'],
-            'type2' => $data['types'][1]['type']['name'],
+            'type1' => $type1,
+            'type2' => $type2,
         ];
     }
 

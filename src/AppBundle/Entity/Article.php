@@ -84,6 +84,29 @@ class Article
      */
     private $owner;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type1", type="string", length=20)
+     */
+    private $type1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type2", type="string", length=20)
+     */
+    private $type2;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="downEvolve", type="integer")
+     */
+    private $downEvolve;
+
+
+
 
     /**
      * Constructor
@@ -92,6 +115,7 @@ class Article
     {
 
     }
+
 
     /**
      * Get id

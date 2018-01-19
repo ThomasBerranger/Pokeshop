@@ -18,21 +18,26 @@ class ArticleController extends Controller
     {
         /** @var PokeApi $pokeApi */
         $pokeApi = $this->get(PokeApi::class);
-        $data = $pokeApi->getOnePokemonInfo(1);
-        $parsedData = $pokeApi->parseResultOnePokemon($data);
+        $numberTotalOfPoke = /*496*/1;
+
+        foreach (range(1, $numberTotalOfPoke) as $number)
+        {
+            $data = $pokeApi->getOnePokemonInfo($number);
+            $parsedData = $pokeApi->parseResultOnePokemon($data);
+
+            $databaseOnePokemon = [];
+
+            $databaseOnePokemon["number"] = $parsedData["id"];
+            $databaseOnePokemon["name"] = $parsedData["name"];
+            $databaseOnePokemon["type1"] = $parsedData["type1"];
+            $databaseOnePokemon["type2"] = $parsedData["type2"];
+
+            dump($databaseOnePokemon);
+        }
 
 
-        $databaseOnePokemon = [];
 
-        $databaseOnePokemon["number"] = $parsedData["id"];
-        $databaseOnePokemon["name"] = $parsedData["name"];
-        $databaseOnePokemon["type1"] = $parsedData["type1"];
-        $databaseOnePokemon["type2"] = $parsedData["type2"];
-
-        dump($databaseOnePokemon);
-
-
-        $data = $pokeApi->getPokeEvolveChainUrl(12);
+        $data = $pokeApi->getPokeEvolveChainUrl(33);
         $parsedData = $pokeApi->parseResultEvolutionChain($data);
 
         dump($parsedData);die;
