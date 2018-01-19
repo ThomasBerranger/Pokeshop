@@ -318,4 +318,76 @@ class Article
     {
         return $this->owner;
     }
+
+    /**
+     * Set type1
+     *
+     * @param string $type1
+     *
+     * @return Article
+     */
+    public function setType1($type1)
+    {
+        $this->type1 = $type1;
+
+        return $this;
+    }
+
+    /**
+     * Get type1
+     *
+     * @return string
+     */
+    public function getType1()
+    {
+        return $this->type1;
+    }
+
+    /**
+     * Set type2
+     *
+     * @param string $type2
+     *
+     * @return Article
+     */
+    public function setType2($type2)
+    {
+        $this->type2 = $type2;
+
+        return $this;
+    }
+
+    /**
+     * Get type2
+     *
+     * @return string
+     */
+    public function getType2()
+    {
+        return $this->type2;
+    }
+
+    /**
+     * Set downEvolve
+     *
+     * @param integer $downEvolve
+     *
+     * @return Article
+     */
+    public function setDownEvolve($downEvolve)
+    {
+        $this->downEvolve = $downEvolve;
+
+        return $this;
+    }
+
+    /**
+     * Get downEvolve
+     *
+     * @return integer
+     */
+    public function getDownEvolve()
+    {
+        return $this->downEvolve;
+    }
 }
