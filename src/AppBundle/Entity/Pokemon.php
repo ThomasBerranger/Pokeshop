@@ -1,0 +1,205 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
+
+/**
+ * Pokemon
+ *
+ * @ORM\Table(name="pokemon")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PokemonRepository")
+ */
+class Pokemon
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="number", type="integer", unique=true)
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=20, unique=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type1", type="string", length=20, nullable=true)
+     */
+    private $type1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type2", type="string", length=20, nullable=true)
+     */
+    private $type2;
+
+    /**
+     * One Pokemon has Many Articles.
+     * @OneToMany(targetEntity="Article", mappedBy="pokemon")
+     */
+    private $articles;
+
+
+    public function __construct() {
+        $this->articles = new ArrayCollection();
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set number
+     *
+     * @param integer $number
+     *
+     * @return Pokemon
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Pokemon
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set type1
+     *
+     * @param string $type1
+     *
+     * @return Pokemon
+     */
+    public function setType1($type1)
+    {
+        $this->type1 = $type1;
+
+        return $this;
+    }
+
+    /**
+     * Get type1
+     *
+     * @return string
+     */
+    public function getType1()
+    {
+        return $this->type1;
+    }
+
+    /**
+     * Set type2
+     *
+     * @param string $type2
+     *
+     * @return Pokemon
+     */
+    public function setType2($type2)
+    {
+        $this->type2 = $type2;
+
+        return $this;
+    }
+
+    /**
+     * Get type2
+     *
+     * @return string
+     */
+    public function getType2()
+    {
+        return $this->type2;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \AppBundle\Entity\Article $article
+     *
+     * @return Pokemon
+     */
+    public function addArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \AppBundle\Entity\Article $article
+     */
+    public function removeArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+}

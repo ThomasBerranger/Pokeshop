@@ -3,7 +3,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -64,11 +66,20 @@ class User implements UserInterface, \Serializable
      */
     private $picture;
 
+    /**
+     * One User has Many Articles.
+     * @OneToMany(targetEntity="Article", mappedBy="owner")
+     */
+    private $articles;
+
+
     public function __construct()
     {
+        $this->articles = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
     }
+
 
     public function getUsername()
     {
@@ -258,5 +269,53 @@ class User implements UserInterface, \Serializable
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \AppBundle\Entity\Article $article
+     *
+     * @return User
+     */
+    public function addArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \AppBundle\Entity\Article $article
+     */
+    public function removeArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Set articles
+     *
+     * @param string $articles
+     *
+     * @return User
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+
+        return $this;
     }
 }

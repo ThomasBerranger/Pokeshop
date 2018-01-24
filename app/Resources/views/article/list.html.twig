@@ -31,20 +31,28 @@
                             <tr>
                                 <th class="h4-responsive font-weight-bold">#</th>
                                 <th class="h4-responsive font-weight-bold">Picture</th>
-                                <th class="h4-responsive font-weight-bold">First Name</th>
-                                <th class="h4-responsive font-weight-bold">Username</th>
+                                <th class="h4-responsive font-weight-bold">Name</th>
+                                <th class="h4-responsive font-weight-bold">Price</th>
+                                <th class="h4-responsive font-weight-bold">Size</th>
+                                <th class="h4-responsive font-weight-bold">Weight</th>
                             </tr>
                             </thead>
                             <tbody class="cursor-pointer align-middle">
 
-                                {% for pokemon in data.results %}
+                                {% for article in articles %}
                                 <tr onclick="location.href='#table'">
-                                    <th class="align-middle h5-responsive" scope="row">1</th>
+                                    <td class="align-middle h5-responsive" scope="row">{{ article.pokemon.number }}</td>
                                     <td class="align-middle h5-responsive">
-                                        <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="#" style="max-height: 80px">
+                                        {% if not article.picture %}
+                                            no picture
+                                        {% else %}
+                                            <img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" class="img-fluid" style="height: 150px;">
+                                        {% endif %}
                                     </td>
-                                    <td class="align-middle h5-responsive">{{ pokemon.name }}</td>
-                                    <td class="align-middle h5-responsive">@mdo</td>
+                                    <td class="align-middle h5-responsive">{{ article.pokemon.name }}</td>
+                                    <td class="align-middle h5-responsive">{{ article.price }} $</td>
+                                    <td class="align-middle h5-responsive">{{ article.size }} m</td>
+                                    <td class="align-middle h5-responsive">{{ article.weight }} kg</td>
                                 </tr>
                                 {% endfor %}
 

@@ -4,6 +4,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Article;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -18,22 +19,15 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number', ChoiceType::class, array(
+            ->add('pokemon', EntityType::class, array(
+                'class' => 'AppBundle\Entity\Pokemon',
+                'choice_label' => 'name',
+                'expanded' => false,
+                'multiple' => false,
                 "attr" => array(
-                    "class" => "form-control"
+                    "class" => "form-control",
                 ),
-                "required" => true,
-                'choices'   => array(
-                    'Yes' => 1,
-                    'No' => 2,
-                    'Maybe' => 3
-                ),
-                'label' => false
-            ))
-            ->add('name', TextType::class, array(
-                "attr" => array(
-                    "class" => "form-control"
-                )
+                "label" => false
             ))
             ->add('size', NumberType::class, array(
                 "attr" => array(
@@ -48,7 +42,8 @@ class ArticleType extends AbstractType
             ->add('description', TextareaType::class, array(
                 "attr" => array(
                     "class" => "form-control basic-textarea"
-                )
+                ),
+                'required' => false,
             ))
             ->add('picture', FileType::class, array(
                 'label' => false,

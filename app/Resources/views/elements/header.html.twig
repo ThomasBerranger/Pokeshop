@@ -51,8 +51,6 @@
     
 
 
-
-
     <!-- Modal -->
     <div class="modal fade right" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-full-height modal-right" role="document">
@@ -67,6 +65,12 @@
                     <h1>{{ app.user.username }}</h1>
                     <h1>{{ app.user.email }}</h1>
                     <img src="{{ asset('uploads/users_pictures/'~app.user.picture) }}" alt="{{ app.user.picture }}" class="img-fluid">
+                    <h1>Articles :
+                        {% for article in app.user.articles %}
+                            {{ article.pokemon.name }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </h1>
+                    <h1>{{ app.user.money }} $</h1>
                 </div>
                 <div class="modal-footer margin-auto">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

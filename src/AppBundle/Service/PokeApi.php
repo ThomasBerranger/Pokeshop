@@ -51,17 +51,20 @@ class PokeApi
 
     public function parseResultOnePokemon($data)
     {
-        $type1 = [];
-        $type2 = [];
-
         if (isset($data['types'][0]['type']['name']))
         {
             $type1 = $data['types'][0]['type']['name'];
+        }
+        else {
+            $type1 = null;
         }
 
         if (isset($data['types'][1]['type']['name']))
         {
             $type2 = $data['types'][1]['type']['name'];
+        }
+        else {
+            $type2 = null;
         }
 
         return [

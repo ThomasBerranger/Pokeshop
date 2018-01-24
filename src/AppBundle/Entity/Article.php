@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,18 +25,11 @@ class Article
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="number", type="integer")
+     * Many Articles have One Pokemon.
+     * @ManyToOne(targetEntity="Pokemon", inversedBy="articles")
+     * @JoinColumn(name="pokemon", referencedColumnName="id", nullable=false)
      */
-    private $number;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=20)
-     */
-    private $name;
+    private $pokemon;
 
     /**
      * @var float
@@ -78,33 +73,11 @@ class Article
     private $price;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="owner", type="string", length=255)
+     * Many Articles have One User.
+     * @ManyToOne(targetEntity="User", inversedBy="articles")
+     * @JoinColumn(name="owner", referencedColumnName="id", nullable=false)
      */
     private $owner;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type1", type="string", length=20)
-     */
-    private $type1;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type2", type="string", length=20)
-     */
-    private $type2;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="downEvolve", type="integer")
-     */
-    private $downEvolve;
-
 
 
 
@@ -125,54 +98,6 @@ class Article
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set number
-     *
-     * @param integer $number
-     *
-     * @return Article
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    /**
-     * Get number
-     *
-     * @return integer
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Article
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -320,74 +245,26 @@ class Article
     }
 
     /**
-     * Set type1
+     * Set pokemon
      *
-     * @param string $type1
+     * @param \AppBundle\Entity\Pokemon $pokemon
      *
      * @return Article
      */
-    public function setType1($type1)
+    public function setPokemon(\AppBundle\Entity\Pokemon $pokemon = null)
     {
-        $this->type1 = $type1;
+        $this->pokemon = $pokemon;
 
         return $this;
     }
 
     /**
-     * Get type1
+     * Get pokemon
      *
-     * @return string
+     * @return \AppBundle\Entity\Pokemon
      */
-    public function getType1()
+    public function getPokemon()
     {
-        return $this->type1;
-    }
-
-    /**
-     * Set type2
-     *
-     * @param string $type2
-     *
-     * @return Article
-     */
-    public function setType2($type2)
-    {
-        $this->type2 = $type2;
-
-        return $this;
-    }
-
-    /**
-     * Get type2
-     *
-     * @return string
-     */
-    public function getType2()
-    {
-        return $this->type2;
-    }
-
-    /**
-     * Set downEvolve
-     *
-     * @param integer $downEvolve
-     *
-     * @return Article
-     */
-    public function setDownEvolve($downEvolve)
-    {
-        $this->downEvolve = $downEvolve;
-
-        return $this;
-    }
-
-    /**
-     * Get downEvolve
-     *
-     * @return integer
-     */
-    public function getDownEvolve()
-    {
-        return $this->downEvolve;
+        return $this->pokemon;
     }
 }
