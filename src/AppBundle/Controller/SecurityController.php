@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\Tests\Service;
@@ -34,7 +35,7 @@ class SecurityController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader)
     {
 
         $user = new User();
@@ -44,17 +45,10 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $file = $user->getPicture();
+            $fileName = $fileUploader->upload($file);
 
-            $picture = $user->getPicture();
-            if ( $picture )
-            {
-                $pictureName = md5(uniqid()).'.'.$picture->guessExtension();
-                $picture->move(
-                    $this->getParameter('users_pictures_directory'),
-                    $pictureName
-                );
-                $user->setPicture($pictureName);
-            }
+            $user->setPicture($fileName);
 
 
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());

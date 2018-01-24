@@ -27,6 +27,19 @@ class ArticleController extends Controller
 
 
     /**
+     * @Route("/article/details/{id}", name="article_details")
+     */
+    public function detailsAction($id)
+    {
+        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+
+        return $this->render('article/details.html.twig',  array(
+            "article" => $article
+        ));
+    }
+
+
+    /**
      * @Route("/article/add", name="article_add")
      */
     public function addAction(Request $request)

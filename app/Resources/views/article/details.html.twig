@@ -13,44 +13,9 @@
                     <!--Panel-->
                     <div class="card">
                         <div class="card-header success-color lighten-1 white-text text-center h4-responsive">
-                            Sale your pokemon
+                            {{ article.pokemon.name }}'s details
                         </div>
-
-                        <div class="card-body">
-
-                            {{ form_start(form) }}
-
-                            <div class="md-form">
-                                {{ form_row(form.pokemon) }}
-                            </div>
-                            <div class="md-form">
-                                {{ form_row(form.size) }}
-                            </div>
-                            <div class="md-form">
-                                {{ form_row(form.weight) }}
-                            </div>
-                            <div class="md-form">
-                                {{ form_row(form.description) }}
-                            </div>
-                            <div class="md-form">
-                                {{ form_row(form.picture) }}
-                            </div>
-                            <div class="md-form">
-                                {{ form_row(form.price) }}
-                            </div>
-
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success">Register</button>
-                            </div>
-
-                            {{ form_end(form) }}
-
-                            <hr>
-                            <h5 class="pull-right h5-responsive">Already a member ? <a href="{{ path('login') }}">Sign in</a></h5>
-
-                        </div>
-
-                    </div>
+                        <h1>{{ article.price }} $</h1>
                 </div>
 
             </div>

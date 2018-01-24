@@ -8,11 +8,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    /**
-     * @Route("/user/{id}", name="user_detail")
-     */
-    public function detailAction(Request $request)
-    {
-        return $this->render('user/detail.html.twig');
-    }
+
 }

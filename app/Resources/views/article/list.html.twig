@@ -40,7 +40,7 @@
                             <tbody class="cursor-pointer align-middle">
 
                                 {% for article in articles %}
-                                <tr onclick="location.href='#table'">
+                                <tr onclick="location.href='{{ path('article_details', {'id':article.id}) }}'">
                                     <td class="align-middle h5-responsive" scope="row">{{ article.pokemon.number }}</td>
                                     <td class="align-middle h5-responsive">
                                         {% if not article.picture %}

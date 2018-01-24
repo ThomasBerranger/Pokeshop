@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
-    private $targetDir = '%kernel.project_dir%/web/uploads/brochures';
+    private $targetDir;
 
     public function __construct($targetDir)
     {
