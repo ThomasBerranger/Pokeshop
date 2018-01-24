@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Pokemon;
 use AppBundle\Form\ArticleType;
+use AppBundle\Service\FileUploader;
 use AppBundle\Service\PokeApi;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,7 +43,7 @@ class ArticleController extends Controller
     /**
      * @Route("/article/add", name="article_add")
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request, FileUploader $fileUploader)
     {
         $article = new Article();
         $user = $this->getUser();
@@ -53,16 +54,10 @@ class ArticleController extends Controller
 
             $article->setOwner($user);
 
-            $picture = $article->getPicture();
-            if ( $picture )
-            {
-                $pictureName = md5(uniqid()).'.'.$picture->guessExtension();
-                $picture->move(
-                    $this->getParameter('articles_pictures_directory'),
-                    $pictureName
-                );
-                $article->setPicture($pictureName);
-            }
+            $file = $article->getPicture();
+            $fileName = $fileUploader->upload($file, "article");
+
+            $article->setPicture($fileName);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);

@@ -45,8 +45,9 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $file = $user->getPicture();
-            $fileName = $fileUploader->upload($file);
+            $fileName = $fileUploader->upload($file, "user");
 
             $user->setPicture($fileName);
 
