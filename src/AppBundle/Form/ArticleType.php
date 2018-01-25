@@ -32,18 +32,21 @@ class ArticleType extends AbstractType
             ->add('size', NumberType::class, array(
                 "attr" => array(
                     "class" => "form-control"
-                )
+                ),
+                "label" => "Size in Meters"
             ))
             ->add('weight', NumberType::class, array(
                 "attr" => array(
                     "class" => "form-control"
-                )
+                ),
+                "label" => "Weight in Kg"
             ))
             ->add('description', TextareaType::class, array(
                 "attr" => array(
                     "class" => "form-control basic-textarea"
                 ),
                 'required' => false,
+                "label" => "Speak about your pokemon"
             ))
             ->add('picture', FileType::class, array(
                 'label' => false,
@@ -52,7 +55,8 @@ class ArticleType extends AbstractType
             ->add('price', NumberType::class, array(
                 "attr" => array(
                     "class" => "form-control"
-                )
+                ),
+                "label" => "Price in $"
             ))
         ;
     }

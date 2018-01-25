@@ -32,12 +32,14 @@ services:
     AppBundle\Service\PokeApi:
         public: true
 
+    AppBundle\Service\Service:
+        public: true
+
+    AppBundle\Service\ColorService:
+        public: true
+
     AppBundle\Service\FileUploader:
         arguments:
             $targetDirUser: '%users_pictures_directory%'
             $targetDirArticle: '%articles_pictures_directory%'
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'

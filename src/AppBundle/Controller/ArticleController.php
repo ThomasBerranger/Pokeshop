@@ -5,8 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Pokemon;
 use AppBundle\Form\ArticleType;
+use AppBundle\Service\ColorService;
 use AppBundle\Service\FileUploader;
 use AppBundle\Service\PokeApi;
+use AppBundle\Service\Service;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +45,7 @@ class ArticleController extends Controller
     /**
      * @Route("/article/add", name="article_add")
      */
-    public function addAction(Request $request, FileUploader $fileUploader)
+    public function addAction(Request $request, FileUploader $fileUploader, Service $service)
     {
         $article = new Article();
         $user = $this->getUser();
@@ -55,14 +57,13 @@ class ArticleController extends Controller
             $article->setOwner($user);
 
             $file = $article->getPicture();
-            $fileName = $fileUploader->upload($file, "article");
+            if ($file)
+            {
+                $fileName = $fileUploader->upload($file, "article");
+                $article->setPicture($fileName);
+            }
 
-            $article->setPicture($fileName);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
-
+            $service->persistAndFlush($article);
 
             return $this->redirectToRoute('homepage');
         }
@@ -78,17 +79,17 @@ class ArticleController extends Controller
 
 
     /**
-     * @Route("/article/dumApi", name="article_dump_api")
+     * @Route("/article/dumpApi", name="article_dump_api")
      */
     public function dumpApiAction(Request $request)
     {
         /** @var PokeApi $pokeApi */
         $pokeApi = $this->get(PokeApi::class);
-        $numberTotalOfPoke = /*496*/151;
+        $numberTotalOfPoke = /*496*/3;
 
         set_time_limit(0); // Temps d'execution illimité
 
-        foreach (range(96, $numberTotalOfPoke) as $number)
+        foreach (range(1, $numberTotalOfPoke) as $number)
         {
             $pokemon = new Pokemon();
 
@@ -102,17 +103,17 @@ class ArticleController extends Controller
             $databaseOnePokemon["type1"] = $parsedData["type1"];
             $databaseOnePokemon["type2"] = $parsedData["type2"];
 
+            /*
+                        $pokemon->setNumber($databaseOnePokemon["number"]);
+                        $pokemon->setName($databaseOnePokemon["name"]);
+                        $pokemon->setType1($databaseOnePokemon["type1"]);
+                        $pokemon->setType2($databaseOnePokemon["type2"]);
 
-            $pokemon->setNumber($databaseOnePokemon["number"]);
-            $pokemon->setName($databaseOnePokemon["name"]);
-            $pokemon->setType1($databaseOnePokemon["type1"]);
-            $pokemon->setType2($databaseOnePokemon["type2"]);
 
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($pokemon);
-            $em->flush();
-
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($pokemon);
+                        $em->flush();
+            */
 
             dump($databaseOnePokemon);
         }

@@ -39,3 +39,69 @@
 .form-2 .input-group-addon {
     border: 1px solid #e9ecef;
 }
+
+/* --------------------------- border for type --------------------------- */
+
+.border-grass {
+    border: 3px solid #4caf50 !important;
+}
+
+.border-fire {
+    border: 3px solid #b71c1c !important;
+}
+
+.border-water {
+    border: 3px solid #64b5f6 !important;
+}
+
+.border-bug {
+    border: 3px solid #2e7d32 !important;
+}
+
+.border-flying {
+    border: 3px solid #e3f2fd !important;
+}
+
+.border-poison {
+    border: 3px solid #9575cd !important;
+}
+
+.border-electric {
+    border: 3px solid #ffeb3b !important;
+}
+
+.border-ground {
+    border: 3px solid #795548 !important;
+}
+
+.border-fairy {
+    border: 3px solid #e1bee7 !important;
+}
+
+.border-fighting {
+    border: 3px solid #e57373 !important;
+}
+
+.border-psychic {
+    border: 3px solid #9c27b0 !important;
+}
+
+.border-steel {
+    border: 3px solid #9e9e9e !important;
+}
+
+.border-ice {
+    border: 3px solid #b3e5fc !important;
+}
+
+.border-dragon {
+    border: 3px solid #6200ea !important;
+}
+
+.border-rock {
+    border: 3px solid #3e2723 !important;
+}
+
+
+
+
