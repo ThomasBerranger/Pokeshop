@@ -14,7 +14,9 @@
                     <div class="card border-{{ article.pokemon.type1 }}">
 
                         <div class="card-header white text-center h1-responsive">
+                            <a href="#" class="btn btn-success pull-left" role="button"><i class="fa fa-shopping-basket"></i></a>
                             {{ article.pokemon.name|capitalize }}
+                            <a href="#" class="btn btn-warning pull-right" role="button"><i class="fa fa-star-o"></i></a>
                         </div>
 
                         <div class="row">
@@ -29,7 +31,7 @@
                                 <h3 class="h3-responsive">Weight : {{ article.weight }} Kg</h3>
                             </div>
 
-                            <div class="col-lg-5 col-md-6 p-5">
+                            <div class="col-lg-5 col-md-6 p-5 text-center">
                                 <img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" class="img-fluid margin-auto" style="max-height: 40vh">
                             </div>
 
@@ -38,8 +40,8 @@
                                 <hr>
                                 <img src="{{ asset('uploads/users_pictures/'~article.owner.picture) }}" alt="{{ article.owner.username }}" class="img-fluid margin-auto rounded-circle" style="max-height: 15vh">
                                 <h3 class="h3-responsive my-1">Username : {{ article.owner.username }}</h3>
-                                <h3 class="h3-responsive my-1">Number of sales : 0</h3>
-                                <h3 class="h3-responsive my-1">Number of purchase : 0</h3>
+                                <h3 class="h3-responsive my-1">N° of sales : 0</h3>
+                                <h3 class="h3-responsive my-1">N° of purchase : 0</h3>
                             </div>
                         </div>
 
