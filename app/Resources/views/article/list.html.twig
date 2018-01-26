@@ -26,42 +26,33 @@
                         </div>
                         <!-- Grid row -->
 
-                        <table class="table table-hover table-responsive-sm font-quicksand">
-                            <thead class="font-didact font-up">
-                            <tr>
-                                <th class="h4-responsive font-weight-bold">#</th>
-                                <th class="h4-responsive font-weight-bold">Picture</th>
-                                <th class="h4-responsive font-weight-bold">Name</th>
-                                <th class="h4-responsive font-weight-bold">Price</th>
-                                <th class="h4-responsive font-weight-bold">Size</th>
-                                <th class="h4-responsive font-weight-bold">Weight</th>
-                                <th class="h4-responsive font-weight-bold">Delete</th>
-                            </tr>
-                            </thead>
-                            <tbody class="cursor-pointer align-middle">
+                        <div class="row">
+                            {% for article in articles %}
 
-                                {% for article in articles %}
-                                <tr onclick="location.href='{{ path('article_details', {'id':article.id}) }}'">
-                                    <td class="align-middle h5-responsive" scope="row">{{ article.pokemon.number }}</td>
-                                    <td class="align-middle h5-responsive">
-                                        {% if not article.picture %}
-                                            no picture
-                                        {% else %}
-                                            <img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" class="img-fluid" style="height: 150px;">
-                                        {% endif %}
-                                    </td>
-                                    <td class="align-middle h5-responsive">{{ article.pokemon.name }}</td>
-                                    <td class="align-middle h5-responsive">{{ article.price }} $</td>
-                                    <td class="align-middle h5-responsive">{{ article.size }} m</td>
-                                    <td class="align-middle h5-responsive">{{ article.weight }} Kg</td>
-                                    <td class="align-middle h5-responsive">
-                                        <a href="{{ path('article_delete', {'id':article.id}) }}" role="button" class="btn btn-danger">Supprimer {{ article.pokemon.name }}</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
+                                <div class="col-sm-12 col-md-6 col-lg-4 hoverable cursor-pointer py-2" onclick="location.href='{{ path('article_details', {'id':article.id}) }}'">
+                                    <div class="row">
+                                        <div class="col-md-6 text-center">
+                                            {% if not article.picture %}
+                                                no picture
+                                            {% else %}
+                                                <img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" class="img-fluid" style="max-height: 200px;">
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h2 class="align-middle h2-responsive">{{ article.pokemon.name|capitalize }}</h2>
+                                            <h4 class="align-middle h4-responsive">Types :
+                                                <span class="border-{{ article.pokemon.type1 }}">{{ article.pokemon.type1 }}</span>
+                                                <span class="border-{{ article.pokemon.type2 }}">{{ article.pokemon.type2 }}</span>
+                                            </h4>
+                                            <h4 class="align-middle h4-responsive">{{ article.price }} $</h4>
+                                            <h5 class="align-middle h5-responsive">{{ article.createdAt|date('m / d / Y') }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            </tbody>
-                        </table>
+                            {% endfor %}
+                        </div>
+
 
                     </div>
                 </div>

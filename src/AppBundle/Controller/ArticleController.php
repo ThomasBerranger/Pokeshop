@@ -82,8 +82,7 @@ class ArticleController extends Controller
     {
         $fs = new Filesystem();
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
-        $fileName = $article->getPicture();
-        $fs->remove(array('symlink', './../web/uploads/articles_pictures/'.$fileName, 'activity.log'));
+        $fs->remove(array('symlink', './../web/uploads/articles_pictures/'.$article->getPicture(), 'activity.log'));
         $service->removeAndFlush($article);
         return $this->redirectToRoute('article_list');
     }

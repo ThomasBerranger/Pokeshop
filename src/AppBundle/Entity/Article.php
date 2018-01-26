@@ -49,7 +49,12 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="string", length=1000, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 1000,
+     *      maxMessage = "Your descritpion cannot be longer than {{ limit }} characters"
+     * )
      */
     private $description;
 
