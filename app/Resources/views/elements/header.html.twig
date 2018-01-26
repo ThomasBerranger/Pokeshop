@@ -48,7 +48,6 @@
 
     </header>
     <!--Main Navigation-->
-    
 
 
     <!-- Modal -->
@@ -56,25 +55,27 @@
         <div class="modal-dialog modal-full-height modal-right" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <img src="{{ asset('uploads/users_pictures/'~app.user.picture) }}" alt="{{ app.user.picture }}" class="img-fluid margin-auto" style="max-height: 30vh">
                 </div>
-                <div class="modal-body text-center">
-                    <h1>{{ app.user.username }}</h1>
-                    <h1>{{ app.user.email }}</h1>
-                    <img src="{{ asset('uploads/users_pictures/'~app.user.picture) }}" alt="{{ app.user.picture }}" class="img-fluid">
-                    <h1>Articles :
+                <div class="modal-body">
+                    <br>
+                    <h3> <li class="fa fa-user"></li> Username : {{ app.user.username }}</h3>
+                    <br>
+                    <h3> <li class="fa fa-envelope-o"></li> Email : {{ app.user.email }}</h3>
+                    <br>
+                    <h3> <li class="fa fa-money"></li> Money : {{ app.user.money }} $</h3>
+                    <br>
+                    <h3>
+                        <img src="{{ asset('img/poke_icon.png') }}" alt="{{ app.user.picture }}" class="img-fluid margin-auto" style="max-height: 30px">
+                        Articles :
                         {% for article in app.user.articles %}
-                            {{ article.pokemon.name }}{% if not loop.last %}, {% endif %}
+                            <a href="{{ path('article_details', {'id':article.id}) }}">{{ article.pokemon.name }}</a>{% if not loop.last %}, {% endif %}
                         {% endfor %}
-                    </h1>
-                    <h1>{{ app.user.money }} $</h1>
+                    </h3>
                 </div>
                 <div class="modal-footer margin-auto">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a role="button" href="{{ path('logout') }}" class="btn btn-primary"> <i class="fa fa-sign-out"></i> Logout</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fa fa-close"></i> </button>
+                    <a role="button" href="{{ path('logout') }}" class="btn btn-primary"> <i class="fa fa-sign-out"></i> </a>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -79,6 +80,13 @@ class Article
      */
     private $owner;
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
 
 
     /**
@@ -86,8 +94,9 @@ class Article
      */
     public function __construct()
     {
-
+        $this->createdAt = new \DateTime();
     }
+
 
 
     /**
@@ -220,28 +229,15 @@ class Article
         return $this->price;
     }
 
-    /**
-     * Set owner
-     *
-     * @param string $owner
-     *
-     * @return Article
-     */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
 
     /**
-     * Get owner
+     * Get createdAt
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getOwner()
+    public function getCreatedAt()
     {
-        return $this->owner;
+        return $this->createdAt;
     }
 
     /**
@@ -251,7 +247,7 @@ class Article
      *
      * @return Article
      */
-    public function setPokemon(\AppBundle\Entity\Pokemon $pokemon = null)
+    public function setPokemon(\AppBundle\Entity\Pokemon $pokemon)
     {
         $this->pokemon = $pokemon;
 
@@ -266,5 +262,29 @@ class Article
     public function getPokemon()
     {
         return $this->pokemon;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Article
+     */
+    public function setOwner(\AppBundle\Entity\User $owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }

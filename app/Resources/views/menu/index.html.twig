@@ -151,7 +151,7 @@
                                     <!--Card content-->
                                     <div class="card-body text-center font-quicksand">
                                         <!--Title-->
-                                        <h4 class="card-title cursor-pointer" onclick="location.href='#bulbi'"><strong>{{ article.pokemon.name }}</strong></h4>
+                                        <h4 class="card-title cursor-pointer" onclick="location.href='#bulbi'"><strong>{{ article.pokemon.name|capitalize }}</strong></h4>
                                         <p class="card-text">
                                             {% if article.description %}
                                                 {{ article.description }}
@@ -200,7 +200,7 @@
 
                                             </div>
                                             <div class="card-body text-center">
-                                                <h4 class="card-title cursor-pointer" onclick="location.href='#sala'"><strong>{{ article.pokemon.name }}</strong></h4>
+                                                <h4 class="card-title cursor-pointer" onclick="location.href='#sala'"><strong>{{ article.pokemon.name|capitalize }}</strong></h4>
                                                 <p class="card-text">
                                                     {% if article.description %}
                                                         {{ article.description }}

@@ -5,16 +5,50 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Pokemon;
 use AppBundle\Form\ArticleType;
-use AppBundle\Service\ColorService;
 use AppBundle\Service\FileUploader;
 use AppBundle\Service\PokeApi;
 use AppBundle\Service\Service;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class ArticleController extends Controller
 {
+
+    /**
+     * @Route("/article/add", name="article_add")
+     */
+    public function addAction(Request $request, FileUploader $fileUploader, Service $service)
+    {
+        $article = new Article();
+        $user = $this->getUser();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $article->setOwner($user);
+
+            $file = $article->getPicture();
+            if ($file)
+            {
+                $fileName = $fileUploader->upload($file, "article");
+                $article->setPicture($fileName);
+            }
+
+            $service->persistAndFlush($article);
+
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render(
+            'article/add.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
+    }
+
 
     /**
      * @Route("/article/list", name="article_list")
@@ -22,7 +56,6 @@ class ArticleController extends Controller
     public function listAction()
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->findAll();
-
         return $this->render('article/list.html.twig',  array(
             "articles" => $article
         ));
@@ -43,39 +76,19 @@ class ArticleController extends Controller
 
 
     /**
-     * @Route("/article/add", name="article_add")
+     * @Route("/article/delete/{id}", name="article_delete")
      */
-    public function addAction(Request $request, FileUploader $fileUploader, Service $service)
+    public function deleteAction($id, Service $service)
     {
-        $article = new Article();
-        $user = $this->getUser();
-        $form = $this->createForm(ArticleType::class, $article);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $article->setOwner($user);
-
-            $file = $article->getPicture();
-            if ($file)
-            {
-                $fileName = $fileUploader->upload($file, "article");
-                $article->setPicture($fileName);
-            }
-
-            $service->persistAndFlush($article);
-
-            return $this->redirectToRoute('homepage');
-        }
-
-        return $this->render(
-            'article/add.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
-
+        $fs = new Filesystem();
+        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+        $fileName = $article->getPicture();
+        $fs->remove(array('symlink', './../web/uploads/articles_pictures/'.$fileName, 'activity.log'));
+        $service->removeAndFlush($article);
+        return $this->redirectToRoute('article_list');
     }
+
+
 
 
     /**

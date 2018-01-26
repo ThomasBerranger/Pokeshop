@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -27,7 +28,7 @@ class Article
     /**
      * Many Articles have One Pokemon.
      * @ManyToOne(targetEntity="Pokemon", inversedBy="articles")
-     * @JoinColumn(name="pokemon_name", referencedColumnName="name")
+     * @JoinColumn(name="pokemon", referencedColumnName="id", nullable=false)
      */
     private $pokemon;
 
@@ -75,10 +76,16 @@ class Article
     /**
      * Many Articles have One User.
      * @ManyToOne(targetEntity="User", inversedBy="articles")
-     * @JoinColumn(name="user_username", referencedColumnName="username")
+     * @JoinColumn(name="owner", referencedColumnName="id", nullable=false)
      */
     private $owner;
 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
 
 
     /**
@@ -90,181 +97,4 @@ class Article
     }
 
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set size
-     *
-     * @param float $size
-     *
-     * @return Article
-     */
-    public function setSize($size)
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
-     * Get size
-     *
-     * @return float
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
-     * Set weight
-     *
-     * @param float $weight
-     *
-     * @return Article
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
-    /**
-     * Get weight
-     *
-     * @return float
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Article
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set picture
-     *
-     * @param string $picture
-     *
-     * @return Article
-     */
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return string
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     *
-     * @return Article
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param string $owner
-     *
-     * @return Article
-     */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return string
-     */
-    public function getOwner()
-    {
-        return $this->owner;
-    }
-
-    /**
-     * Set pokemon
-     *
-     * @param \AppBundle\Entity\Pokemon $pokemon
-     *
-     * @return Article
-     */
-    public function setPokemon(\AppBundle\Entity\Pokemon $pokemon = null)
-    {
-        $this->pokemon = $pokemon;
-
-        return $this;
-    }
-
-    /**
-     * Get pokemon
-     *
-     * @return \AppBundle\Entity\Pokemon
-     */
-    public function getPokemon()
-    {
-        return $this->pokemon;
-    }
 }

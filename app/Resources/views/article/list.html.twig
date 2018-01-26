@@ -35,6 +35,7 @@
                                 <th class="h4-responsive font-weight-bold">Price</th>
                                 <th class="h4-responsive font-weight-bold">Size</th>
                                 <th class="h4-responsive font-weight-bold">Weight</th>
+                                <th class="h4-responsive font-weight-bold">Delete</th>
                             </tr>
                             </thead>
                             <tbody class="cursor-pointer align-middle">
@@ -53,6 +54,9 @@
                                     <td class="align-middle h5-responsive">{{ article.price }} $</td>
                                     <td class="align-middle h5-responsive">{{ article.size }} m</td>
                                     <td class="align-middle h5-responsive">{{ article.weight }} Kg</td>
+                                    <td class="align-middle h5-responsive">
+                                        <a href="{{ path('article_delete', {'id':article.id}) }}" role="button" class="btn btn-danger">Supprimer {{ article.pokemon.name }}</a>
+                                    </td>
                                 </tr>
                                 {% endfor %}
 
