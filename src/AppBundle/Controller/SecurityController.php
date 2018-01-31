@@ -45,12 +45,13 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if ($user->getPicture())
+            {
+                $file = $user->getPicture();
+                $fileName = $fileUploader->upload($file, "user");
 
-            $file = $user->getPicture();
-            $fileName = $fileUploader->upload($file, "user");
-
-            $user->setPicture($fileName);
-
+                $user->setPicture($fileName);
+            }
 
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);

@@ -40,8 +40,8 @@
                                 <hr>
                                 <img src="{{ asset('uploads/users_pictures/'~article.owner.picture) }}" alt="{{ article.owner.username }}" class="img-fluid margin-auto rounded-circle" style="max-height: 15vh">
                                 <h3 class="h3-responsive my-1">Username : {{ article.owner.username }}</h3>
-                                <h3 class="h3-responsive my-1">N° of sales : 0</h3>
-                                <h3 class="h3-responsive my-1">N° of purchase : 0</h3>
+                                <h3 class="h3-responsive my-1">N° of sales : {{ article.owner.sale }}</h3>
+                                <h3 class="h3-responsive my-1">N° of purchases : {{ article.owner.purchase }}</h3>
                             </div>
                         </div>
 

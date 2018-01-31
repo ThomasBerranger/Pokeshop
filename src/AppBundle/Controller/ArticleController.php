@@ -74,6 +74,7 @@ class ArticleController extends Controller
     }
 
 
+
     /**
      * @Route("/article/delete/{id}", name="article_delete")
      */

@@ -68,9 +68,23 @@ class User implements UserInterface, \Serializable
 
     /**
      * One User has Many Articles.
-     * @OneToMany(targetEntity="Article", mappedBy="owner")
+     * @OneToMany(targetEntity="Article", mappedBy="owner", cascade={"remove"})
      */
     private $articles;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="sale", type="integer")
+     */
+    private $sale;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="purchase", type="integer")
+     */
+    private $purchase;
 
 
     public function __construct()
@@ -78,6 +92,8 @@ class User implements UserInterface, \Serializable
         $this->articles = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
+        $this->sale = 0;
+        $this->purchase = 0;
     }
 
 
@@ -114,6 +130,12 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->email,
+            $this->isActive,
+            $this->money,
+            $this->picture,
+            $this->sale,
+            $this->purchase,
         ));
     }
 
@@ -124,6 +146,12 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->email,
+            $this->isActive,
+            $this->money,
+            $this->picture,
+            $this->sale,
+            $this->purchase,
             ) = unserialize($serialized);
     }
 
@@ -317,5 +345,53 @@ class User implements UserInterface, \Serializable
         $this->articles = $articles;
 
         return $this;
+    }
+
+    /**
+     * Set sale
+     *
+     * @param integer $sale
+     *
+     * @return User
+     */
+    public function setSale($sale)
+    {
+        $this->sale = $sale;
+
+        return $this;
+    }
+
+    /**
+     * Get sale
+     *
+     * @return integer
+     */
+    public function getSale()
+    {
+        return $this->sale;
+    }
+
+    /**
+     * Set purchase
+     *
+     * @param integer $purchase
+     *
+     * @return User
+     */
+    public function setPurchase($purchase)
+    {
+        $this->purchase = $purchase;
+
+        return $this;
+    }
+
+    /**
+     * Get purchase
+     *
+     * @return integer
+     */
+    public function getPurchase()
+    {
+        return $this->purchase;
     }
 }
