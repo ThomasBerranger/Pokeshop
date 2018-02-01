@@ -49,7 +49,12 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="string", length=1000, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 1000,
+     *      maxMessage = "Your descritpion cannot be longer than {{ limit }} characters"
+     * )
      */
     private $description;
 
@@ -93,8 +98,209 @@ class Article
      */
     public function __construct()
     {
-
+        $this->createdAt = new \DateTime();
     }
 
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set size
+     *
+     * @param float $size
+     *
+     * @return Article
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set weight
+     *
+     * @param float $weight
+     *
+     * @return Article
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return float
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Article
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return Article
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Article
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Article
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set pokemon
+     *
+     * @param \AppBundle\Entity\Pokemon $pokemon
+     *
+     * @return Article
+     */
+    public function setPokemon(\AppBundle\Entity\Pokemon $pokemon)
+    {
+        $this->pokemon = $pokemon;
+
+        return $this;
+    }
+
+    /**
+     * Get pokemon
+     *
+     * @return \AppBundle\Entity\Pokemon
+     */
+    public function getPokemon()
+    {
+        return $this->pokemon;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Article
+     */
+    public function setOwner(\AppBundle\Entity\User $owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
 }

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 
 /**
@@ -58,15 +59,25 @@ class Pokemon
     private $articles;
 
 
+    /**
+     * Many Pokemons have Many Users.
+     * @ManyToMany(targetEntity="User", mappedBy="pokemons_favorites")
+     */
+    private $users_favorites;
+
+
+
     public function __construct() {
+        $this->users_favorites = new  ArrayCollection();
         $this->articles = new ArrayCollection();
     }
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -90,7 +101,7 @@ class Pokemon
     /**
      * Get number
      *
-     * @return int
+     * @return integer
      */
     public function getNumber()
     {
@@ -176,7 +187,7 @@ class Pokemon
      *
      * @return Pokemon
      */
-    public function addArticle(\AppBundle\Entity\Article $article)
+    public function addArticle(Article $article)
     {
         $this->articles[] = $article;
 
@@ -188,7 +199,7 @@ class Pokemon
      *
      * @param \AppBundle\Entity\Article $article
      */
-    public function removeArticle(\AppBundle\Entity\Article $article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }
@@ -201,5 +212,39 @@ class Pokemon
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Add usersFavorite
+     *
+     * @param \AppBundle\Entity\User $usersFavorite
+     *
+     * @return Pokemon
+     */
+    public function addUsersFavorite(\AppBundle\Entity\User $usersFavorite)
+    {
+        $this->users_favorites[] = $usersFavorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove usersFavorite
+     *
+     * @param \AppBundle\Entity\User $usersFavorite
+     */
+    public function removeUsersFavorite(\AppBundle\Entity\User $usersFavorite)
+    {
+        $this->users_favorites->removeElement($usersFavorite);
+    }
+
+    /**
+     * Get usersFavorites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsersFavorites()
+    {
+        return $this->users_favorites;
     }
 }

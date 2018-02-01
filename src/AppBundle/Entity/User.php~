@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -86,15 +88,25 @@ class User implements UserInterface, \Serializable
      */
     private $purchase;
 
+    /**
+     * Many Users have Many Pokemons.
+     * @ManyToMany(targetEntity="Pokemon", inversedBy="users_favorites")
+     * @JoinTable(name="users_pokemons")
+     */
+    private $pokemons_favorites;
+
+
 
     public function __construct()
     {
+        $this->pokemons_favorites = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
         $this->sale = 0;
         $this->purchase = 0;
     }
+
 
 
     public function getUsername()
@@ -251,6 +263,7 @@ class User implements UserInterface, \Serializable
         return $this->isActive;
     }
 
+
     /**
      * Set money
      *
@@ -300,54 +313,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Add article
-     *
-     * @param \AppBundle\Entity\Article $article
-     *
-     * @return User
-     */
-    public function addArticle(\AppBundle\Entity\Article $article)
-    {
-        $this->articles[] = $article;
-
-        return $this;
-    }
-
-    /**
-     * Remove article
-     *
-     * @param \AppBundle\Entity\Article $article
-     */
-    public function removeArticle(\AppBundle\Entity\Article $article)
-    {
-        $this->articles->removeElement($article);
-    }
-
-    /**
-     * Get articles
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArticles()
-    {
-        return $this->articles;
-    }
-
-    /**
-     * Set articles
-     *
-     * @param string $articles
-     *
-     * @return User
-     */
-    public function setArticles($articles)
-    {
-        $this->articles = $articles;
-
-        return $this;
-    }
-
-    /**
      * Set sale
      *
      * @param integer $sale
@@ -394,4 +359,39 @@ class User implements UserInterface, \Serializable
     {
         return $this->purchase;
     }
+
+    /**
+     * Add article
+     *
+     * @param \AppBundle\Entity\Article $article
+     *
+     * @return User
+     */
+    public function addArticle(Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \AppBundle\Entity\Article $article
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
 }

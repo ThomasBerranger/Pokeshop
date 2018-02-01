@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="container-fluid p-5 view-list">
+    <div class="container-fluid view-list">
         <div class="row">
             <div class="col-md-12 p-5 article-table">
 
@@ -23,7 +23,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <h2 class="align-middle h2-responsive my-2 h2">{{ article.pokemon.name|capitalize }}</h2>
-                                            <h4 class="align-middle h4-responsive my-3">Types :
+                                            <h4 class="align-middle h4-responsive my-3">
                                                 <span class="border-{{ article.pokemon.type1 }} p-1">{{ article.pokemon.type1 }}</span>
                                                 <span class="border-{{ article.pokemon.type2 }} p-1">{{ article.pokemon.type2 }}</span>
                                             </h4>

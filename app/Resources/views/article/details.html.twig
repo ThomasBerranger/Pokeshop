@@ -13,22 +13,26 @@
                     <!--Panel-->
                     <div class="card border-{{ article.pokemon.type1 }}">
 
-                        <div class="card-header white text-center h1-responsive">
+                        <div class="card-header white text-center h1-responsive font-quicksand">
                             <a href="#" class="btn btn-success pull-left" role="button"><i class="fa fa-shopping-basket"></i></a>
                             {{ article.pokemon.name|capitalize }}
-                            <a href="#" class="btn btn-warning pull-right" role="button"><i class="fa fa-star-o"></i></a>
+                            {% for userFavorite in article.pokemon.usersFavorites if userFavorite == app.user %}
+                                <a href="{{ path('user_remove_favorite', {'id':article.id}) }}" class="btn btn-warning pull-right" role="button"><i class="fa fa-star"></i></a>
+                            {% else %}
+                                <a href="{{ path('user_add_favorite', {'id':article.id}) }}" class="btn btn-warning pull-right" role="button"><i class="fa fa-star-o"></i></a>
+                            {% endfor %}
                         </div>
 
                         <div class="row">
                             <div class="col-lg-4 col-md-6 text-center p-5">
                                 <h2 class="h2-responsive">Détails</h2>
                                 <hr>
-                                <h3 class="h3-responsive">Price : {{ article.price }} $</h3>
-                                <h3 class="h3-responsive">Added the : {{ article.createdAt|date('d / m / Y') }}</h3>
-                                <h3 class="h3-responsive">Official number : {{ article.pokemon.number }}</h3>
-                                <h3 class="h3-responsive">Types : {{ article.pokemon.type1 }} {% if article.pokemon.type2 is not null %}&{% endif %} {{ article.pokemon.type2 }}</h3>
-                                <h3 class="h3-responsive">Size : {{ article.size }} m</h3>
-                                <h3 class="h3-responsive">Weight : {{ article.weight }} Kg</h3>
+                                <h3 class="h3-responsive py-1">Price : {{ article.price }} $</h3>
+                                <h3 class="h3-responsive py-1">Added the : {{ article.createdAt|date('d / m / Y') }}</h3>
+                                <h3 class="h3-responsive py-1">Official number : {{ article.pokemon.number }}</h3>
+                                <h3 class="h3-responsive py-1">Types : {{ article.pokemon.type1 }} {% if article.pokemon.type2 is not null %}&{% endif %} {{ article.pokemon.type2 }}</h3>
+                                <h3 class="h3-responsive py-1">Size : {{ article.size }} m</h3>
+                                <h3 class="h3-responsive py-1">Weight : {{ article.weight }} Kg</h3>
                             </div>
 
                             <div class="col-lg-5 col-md-6 p-5 text-center">
@@ -38,10 +42,10 @@
                             <div class="col-lg-3 col-md-12 text-center p-5">
                                 <h2 class="h2-responsive">Current owner</h2>
                                 <hr>
-                                <img src="{{ asset('uploads/users_pictures/'~article.owner.picture) }}" alt="{{ article.owner.username }}" class="img-fluid margin-auto rounded-circle" style="max-height: 15vh">
-                                <h3 class="h3-responsive my-1">Username : {{ article.owner.username }}</h3>
-                                <h3 class="h3-responsive my-1">N° of sales : {{ article.owner.sale }}</h3>
-                                <h3 class="h3-responsive my-1">N° of purchases : {{ article.owner.purchase }}</h3>
+                                <img src="{{ asset('uploads/users_pictures/'~article.owner.picture) }}" alt="{{ article.owner.username }}" class="img-fluid margin-auto rounded-circle py-1" style="max-height: 15vh">
+                                <h3 class="h3-responsive py-1">Username : {{ article.owner.username }}</h3>
+                                <h3 class="h3-responsive py-1">N° of sales : {{ article.owner.sale }}</h3>
+                                <h3 class="h3-responsive py-1">N° of purchases : {{ article.owner.purchase }}</h3>
                             </div>
                         </div>
 

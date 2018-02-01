@@ -93,7 +93,6 @@ class Article
     private $createdAt;
 
 
-
     /**
      * Constructor
      */
@@ -101,7 +100,6 @@ class Article
     {
         $this->createdAt = new \DateTime();
     }
-
 
 
     /**
@@ -234,6 +232,19 @@ class Article
         return $this->price;
     }
 
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Article
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 
     /**
      * Get createdAt

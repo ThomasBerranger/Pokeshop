@@ -29,13 +29,8 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    AppBundle\Service\PokeApi:
-        public: true
-
-    AppBundle\Service\Service:
-        public: true
-
-    AppBundle\Service\ColorService:
+    AppBundle\Service\:
+        resource: '../../src/AppBundle/Service'
         public: true
 
     AppBundle\Service\FileUploader:

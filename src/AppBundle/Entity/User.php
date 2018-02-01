@@ -5,13 +5,18 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"})
+ * @UniqueEntity(fields={"username"})
  */
 class User implements UserInterface, \Serializable
 {
@@ -23,11 +28,25 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min="3",
+     *     max="15",
+     *     minMessage="Your username must be larger than {{ limit }} letters",
+     *     maxMessage="Your username must be smaller than {{ limit }} letters"
+     * )
+     * @ORM\Column(name="username", type="string", length=15, unique=true)
      */
     private $username;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min="3",
+     *     max="15",
+     *     minMessage="Your password must be larger than {{ limit }} letters",
+     *     maxMessage="Your password must be smaller than {{ limit }} letters"
+     * )
      * @ORM\Column(type="string", length=64)
      */
     private $password;
@@ -39,7 +58,12 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     * @ORM\Column(name="email", type="string", length=60, unique=true)
      */
     private $email;
 
@@ -86,15 +110,25 @@ class User implements UserInterface, \Serializable
      */
     private $purchase;
 
+    /**
+     * Many Users have Many Pokemons.
+     * @ManyToMany(targetEntity="Pokemon", inversedBy="users_favorites")
+     * @JoinTable(name="users_pokemons_favorites")
+     */
+    private $pokemons_favorites;
+
+
 
     public function __construct()
     {
+        $this->pokemons_favorites = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
         $this->sale = 0;
         $this->purchase = 0;
     }
+
 
 
     public function getUsername()
@@ -251,6 +285,7 @@ class User implements UserInterface, \Serializable
         return $this->isActive;
     }
 
+
     /**
      * Set money
      *
@@ -300,54 +335,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Add article
-     *
-     * @param \AppBundle\Entity\Article $article
-     *
-     * @return User
-     */
-    public function addArticle(\AppBundle\Entity\Article $article)
-    {
-        $this->articles[] = $article;
-
-        return $this;
-    }
-
-    /**
-     * Remove article
-     *
-     * @param \AppBundle\Entity\Article $article
-     */
-    public function removeArticle(\AppBundle\Entity\Article $article)
-    {
-        $this->articles->removeElement($article);
-    }
-
-    /**
-     * Get articles
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArticles()
-    {
-        return $this->articles;
-    }
-
-    /**
-     * Set articles
-     *
-     * @param string $articles
-     *
-     * @return User
-     */
-    public function setArticles($articles)
-    {
-        $this->articles = $articles;
-
-        return $this;
-    }
-
-    /**
      * Set sale
      *
      * @param integer $sale
@@ -393,5 +380,74 @@ class User implements UserInterface, \Serializable
     public function getPurchase()
     {
         return $this->purchase;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \AppBundle\Entity\Article $article
+     *
+     * @return User
+     */
+    public function addArticle(Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \AppBundle\Entity\Article $article
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+
+    /**
+     * Add pokemonsFavorite
+     *
+     * @param \AppBundle\Entity\Pokemon $pokemonsFavorite
+     *
+     * @return User
+     */
+    public function addPokemonsFavorite(Pokemon $pokemonsFavorite)
+    {
+        $this->pokemons_favorites[] = $pokemonsFavorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove pokemonsFavorite
+     *
+     * @param \AppBundle\Entity\Pokemon $pokemonsFavorite
+     */
+    public function removePokemonsFavorite(Pokemon $pokemonsFavorite)
+    {
+        $this->pokemons_favorites->removeElement($pokemonsFavorite);
+    }
+
+    /**
+     * Get pokemonsFavorites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPokemonsFavorites()
+    {
+        return $this->pokemons_favorites;
     }
 }
