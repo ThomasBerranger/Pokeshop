@@ -52,11 +52,20 @@ class ArticleController extends Controller
     /**
      * @Route("/article/list", name="article_list")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->findAll();
+
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $article, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            9/*limit per page*/
+        );
+
         return $this->render('article/list.html.twig',  array(
-            "articles" => $article
+            "articles" => $pagination
         ));
     }
 

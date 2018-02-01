@@ -109,3 +109,7 @@ li.cursor-pointer:hover {
         transform: translateY(46px);
     }
 }
+
+.no-decoration {
+    text-decoration: none;
+}
