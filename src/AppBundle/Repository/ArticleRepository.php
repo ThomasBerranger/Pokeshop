@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLastLimited()
+    {
+        $articles = $this->createQueryBuilder('a')
+            ->addOrderBy('a.id', 'desc')
+            ->setMaxResults( 5 )
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $articles;
+    }
 }

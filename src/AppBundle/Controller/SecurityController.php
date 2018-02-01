@@ -7,7 +7,6 @@ use AppBundle\Form\UserType;
 use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\EventDispatcher\Tests\Service;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -42,7 +41,6 @@ class SecurityController extends Controller
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -57,11 +55,9 @@ class SecurityController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
 
             $token = new UsernamePasswordToken(
                 $user,
@@ -72,7 +68,6 @@ class SecurityController extends Controller
 
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
-
 
             return $this->redirectToRoute('homepage');
         }

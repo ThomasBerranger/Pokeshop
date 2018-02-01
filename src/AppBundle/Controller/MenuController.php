@@ -15,11 +15,19 @@ class MenuController extends Controller
     {
         $homeNavbar = true;
 
-        $article = $this->getDoctrine()->getRepository(Article::class)->findBy(array(), array('id' => 'DESC'));
+        $article = $this->getDoctrine()->getRepository(Article::class)->getLastLimited();
 
         return $this->render('menu/index.html.twig', array(
             'homeNavbar' => $homeNavbar,
             'articles' =>$article
         ));
+    }
+
+    /**
+     * @Route("/basket", name="basket")
+     */
+    public function basketAction()
+    {
+        return $this->render('menu/basket.html.twig');
     }
 }

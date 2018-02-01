@@ -31,7 +31,7 @@ class UserController extends Controller
 
             $service->persistAndFlush($user);
 
-            return $this->redirectToRoute('logout');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('user/edit.html.twig', array(
@@ -47,7 +47,7 @@ class UserController extends Controller
     {
         $fs = new Filesystem();
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-        // $fs->remove(array('symlink', './../web/uploads/users_pictures/'.$user->getPicture(), 'activity.log'));
+        $fs->remove(array('symlink', './../web/uploads/users_pictures/'.$user->getPicture(), 'activity.log'));
         $service->removeAndFlush($user);
         return $this->redirectToRoute('logout');
     }

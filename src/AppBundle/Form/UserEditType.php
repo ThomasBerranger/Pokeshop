@@ -31,9 +31,6 @@ class UserEditType extends AbstractType
                     "class" => "form-control"
                 )
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Edit',
-            ))
         ;
     }
 
