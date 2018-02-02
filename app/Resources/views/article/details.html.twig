@@ -28,6 +28,11 @@
                                 {{ message }}
                             </div>
                         {% endfor %}
+                        {% for message in app.flashes('fav_add') %}
+                            <div class="d-block text-center h4-responsive font-quicksand green darken-1 text-white">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
 
                         <div class="row">
                             <div class="col-lg-4 col-md-6 text-center p-5">

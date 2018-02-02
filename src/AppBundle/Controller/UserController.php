@@ -6,8 +6,10 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Service\Service;
+use Doctrine\DBAL\DBALException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -63,6 +65,8 @@ class UserController extends Controller
 
         $service->persistAndFlush($user);
 
+        $this->addFlash('fav_add', 'Successfully added to your favorite list');
+
         return $this->redirectToRoute('article_details',  array(
             "id" => $article->getId()
         ));
@@ -79,8 +83,11 @@ class UserController extends Controller
 
         $service->persistAndFlush($user);
 
+        $this->addFlash('fav_add', 'Successfully removed to your favorite list');
+
         return $this->redirectToRoute('article_details',  array(
             "id" => $article->getId()
         ));
     }
+
 }

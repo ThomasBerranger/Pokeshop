@@ -17,9 +17,14 @@
                             <h2 class="h1-responsive">Your basket</h2>
                         </div>
 
-                        <div>
+                        {% for message in app.flashes('remove_fav') %}
+                            <div class="d-block text-center h4-responsive font-quicksand green darken-1 text-white">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
 
-                            <table class="table table-striped font-quicksand">
+                        <div>
+                            <table class="table table-striped font-quicksand table-responsive-sm">
                                 <thead>
                                 <tr>
                                     <th class="h3-responsive">#</th>
@@ -33,12 +38,18 @@
                                     <tr>
                                         <th scope="row" class="h3-responsive">{{ article.pokemon.number }}</th>
                                         <td><img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" style="max-height: 50px"></td>
-                                        <td class="h3-responsive">{{ article.pokemon.name }}</td>
+                                        <td class="h3-responsive">{{ article.pokemon.name|capitalize }}</td>
                                         <td class="h3-responsive">{{ article.price }} $</td>
-                                        <td><a href="#" role="button" class="btn btn-danger"><i class="fa fa-close"></i></a></td>
+                                        <td><a href="{{ path('article_remove_basket', {'id':article.id}) }}" role="button" class="btn btn-danger"><i class="fa fa-close"></i></a></td>
                                     </tr>
                                 {% endfor %}
-
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="h3-responsive pull-right">Total :</td>
+                                    <th class="h3-responsive">{{ totalPrice }} $</th>
+                                    <td><a href="#" role="button" class="btn btn-success"><i class="fa fa-credit-card-alt"></i></a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

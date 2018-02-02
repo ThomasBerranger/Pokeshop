@@ -120,6 +120,24 @@ class ArticleController extends Controller
 
 
     /**
+     * @Route("/article/remove_basket/{id}", name="article_remove_basket")
+     */
+    public function removeBasketAction(Article $article, Service $service)
+    {
+        $user = $this->getUser();
+
+        $user->removeBasketArticle($article);
+
+        $service->persistAndFlush($user);
+
+        $this->addFlash('remove_fav', 'Article removed from your basket');
+
+        return $this->redirectToRoute('basket');
+    }
+
+
+
+    /**
      * @Route("/article/dumpApi", name="article_dump_api")
      */
     public function dumpApiAction(Request $request)
