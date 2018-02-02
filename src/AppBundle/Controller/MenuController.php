@@ -15,11 +15,14 @@ class MenuController extends Controller
     {
         $homeNavbar = true;
 
-        $article = $this->getDoctrine()->getRepository(Article::class)->getLastLimited();
+        $articles = $this->getDoctrine()->getRepository(Article::class)->getLastLimited();
+
+        $articlesFavorites = $this->getDoctrine()->getRepository(Article::class)->getMostPopular();
 
         return $this->render('menu/index.html.twig', array(
             'homeNavbar' => $homeNavbar,
-            'articles' =>$article
+            'articles' =>$articles,
+            'articlesFavorites' =>$articlesFavorites
         ));
     }
 

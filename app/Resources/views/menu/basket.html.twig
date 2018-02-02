@@ -37,8 +37,8 @@
                                 {% for article in articles %}
                                     <tr>
                                         <th scope="row" class="h3-responsive">{{ article.pokemon.number }}</th>
-                                        <td><img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" style="max-height: 50px"></td>
-                                        <td class="h3-responsive">{{ article.pokemon.name|capitalize }}</td>
+                                        <td><img class="cursor-pointer" src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" style="max-height: 50px" onclick="location.href='{{ path('article_details', {'id':article.id}) }}'"></td>
+                                        <td class="h3-responsive cursor-pointer" onclick="location.href='{{ path('article_details', {'id':article.id}) }}'">{{ article.pokemon.name|capitalize }}</td>
                                         <td class="h3-responsive">{{ article.price }} $</td>
                                         <td><a href="{{ path('article_remove_basket', {'id':article.id}) }}" role="button" class="btn btn-danger"><i class="fa fa-close"></i></a></td>
                                     </tr>

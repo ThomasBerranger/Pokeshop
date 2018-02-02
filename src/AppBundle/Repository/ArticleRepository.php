@@ -18,7 +18,21 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult()
         ;
-
         return $articles;
     }
+
+
+    public function getMostPopular()
+    {
+        $articles = $this->createQueryBuilder('a')
+            ->addSelect('count(a.id) as HIDDEN nb_a')
+            ->leftJoin('a.basket_users', 'u')
+            ->groupBy('a')
+            ->addOrderBy('nb_a', 'desc')
+            ->setMaxResults( 3 )
+            ->getQuery()->getResult();
+        ;
+        return $articles;
+    }
+
 }

@@ -47,21 +47,15 @@
                         <li class="list-group-item text-justify text-center h5-responsive">
                             <dt>Most favorite :</dt>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
-                            <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="..." height="60px">
-                            <dt>Salamèche</dt>
-                            <span class="badge badge-primary warning-color-dark badge-pill">5 <i class="fa fa-star" aria-hidden="true"></i></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
-                            <img src="http://pokelyris.livehost.fr/theme/ToonCraft/img/bulbizar.png" alt="..." height="60px">
-                            <dt>Bulbizarre</dt>
-                            <span class="badge badge-primary warning-color-dark badge-pill">3 <i class="fa fa-star" aria-hidden="true"></i></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
-                            <img src="https://www.papyswarriors.com/medias/album/7-carapuce.png" alt="..." height="60px">
-                            <dt>Carapuce</dt>
-                            <span class="badge badge-primary warning-color-dark badge-pill">2 <i class="fa fa-star" aria-hidden="true"></i></span>
-                        </li>
+
+                        {% for articleFav in articlesFavorites %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
+                                <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="..." height="60px">
+                                <dt>{{ articleFav.pokemon.name }}</dt>
+                                <span class="badge badge-primary warning-color-dark badge-pill">5 <i class="fa fa-star" aria-hidden="true"></i></span>
+                            </li>
+                        {% endfor %}
+
                     </ul>
                     <br><br>
                 </div>
@@ -84,18 +78,6 @@
                             <dt>Eau</dt>
                             <span class="badge badge-primary badge-pill">14</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
-                            <dt>Feu</dt>
-                            <span class="badge badge-primary badge-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
-                            <dt>Plante</dt>
-                            <span class="badge badge-primary badge-pill">6</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#feu'">
-                            <dt>Dragon</dt>
-                            <span class="badge badge-primary badge-pill">0</span>
-                        </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center disabled">
                             <dt>Legendaire</dt>
                             <span class="badge badge-primary badge-pill">1</span>
@@ -110,21 +92,16 @@
                         <li class="list-group-item text-justify text-center h5-responsive">
                             <dt>Most favorite :</dt>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
-                            <img src="https://orig00.deviantart.net/e912/f/2014/093/b/3/charmander_by_mighty355-d7cw08c.png" alt="..." height="60px">
-                            <dt>Salamèche</dt>
-                            <span class="badge badge-primary warning-color-dark badge-pill">5 <i class="fa fa-star" aria-hidden="true"></i></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
-                            <img src="http://pokelyris.livehost.fr/theme/ToonCraft/img/bulbizar.png" alt="..." height="60px">
-                            <dt>Bulbizarre</dt>
-                            <span class="badge badge-primary warning-color-dark badge-pill">3 <i class="fa fa-star" aria-hidden="true"></i></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='#eau'">
-                            <img src="https://www.papyswarriors.com/medias/album/7-carapuce.png" alt="..." height="60px">
-                            <dt>Carapuce</dt>
-                            <span class="badge badge-primary warning-color-dark badge-pill">2 <i class="fa fa-star" aria-hidden="true"></i></span>
-                        </li>
+                        {% for articleFav in articlesFavorites %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" onclick="location.href='{{ path('article_details', {'id':articleFav.id}) }}'">
+                                <img src="{{ asset('uploads/articles_pictures/'~articleFav.picture) }}" alt="{{ articleFav.pokemon.name }}" class="img-fluid first-image-index" style="max-height: 80px;">
+                                <dt>{{ articleFav.pokemon.name|capitalize }}</dt>
+                                <span class="badge badge-primary warning-color-dark badge-pill">
+
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </span>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
 

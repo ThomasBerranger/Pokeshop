@@ -28,7 +28,6 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(
      *     min="3",
      *     max="15",
@@ -40,7 +39,6 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(
      *     min="3",
      *     max="15",
@@ -58,7 +56,6 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
@@ -130,7 +127,7 @@ class User implements UserInterface, \Serializable
     {
         $this->pokemons_favorites = new ArrayCollection();
         $this->articles = new ArrayCollection();
-        $this->basket_article = new ArrayCollection();
+        $this->articles = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
         $this->sale = 0;
