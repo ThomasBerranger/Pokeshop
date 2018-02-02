@@ -2,16 +2,60 @@
 
 {% block body %}
 
-    <div class="container-fluid p-5">
-
+    <div class="container-fluid view" style="height: 100vh">
+        <br><br><br><br>
+        <br><br><br>
         <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 card py-5 m-5 white">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+
+                        <div class="text-center font-quicksand">
+                            <h2 class="h1-responsive">Your basket</h2>
+                        </div>
+
+                        <div>
+
+                            <table class="table table-striped font-quicksand">
+                                <thead>
+                                <tr>
+                                    <th class="h3-responsive">#</th>
+                                    <th class="h3-responsive">Picture</th>
+                                    <th class="h3-responsive">Name</th>
+                                    <th class="h3-responsive">Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for article in articles %}
+                                    <tr>
+                                        <th scope="row" class="h3-responsive">{{ article.pokemon.number }}</th>
+                                        <td><img src="{{ asset('uploads/articles_pictures/'~article.picture) }}" alt="{{ article.pokemon.name }}" style="max-height: 50px"></td>
+                                        <td class="h3-responsive">{{ article.pokemon.name }}</td>
+                                        <td class="h3-responsive">{{ article.price }} $</td>
+                                        <td><a href="#" role="button" class="btn btn-danger"><i class="fa fa-close"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
 
 
 
+
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </div>
 
 {% endblock %}
+
 
 {% block stylesheets %}
 {% endblock %}

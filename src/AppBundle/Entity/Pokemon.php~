@@ -58,7 +58,6 @@ class Pokemon
      */
     private $articles;
 
-
     /**
      * Many Pokemons have Many Users.
      * @ManyToMany(targetEntity="User", mappedBy="pokemons_favorites")
@@ -212,5 +211,39 @@ class Pokemon
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Add usersFavorite
+     *
+     * @param \AppBundle\Entity\User $usersFavorite
+     *
+     * @return Pokemon
+     */
+    public function addUsersFavorite(\AppBundle\Entity\User $usersFavorite)
+    {
+        $this->users_favorites[] = $usersFavorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove usersFavorite
+     *
+     * @param \AppBundle\Entity\User $usersFavorite
+     */
+    public function removeUsersFavorite(\AppBundle\Entity\User $usersFavorite)
+    {
+        $this->users_favorites->removeElement($usersFavorite);
+    }
+
+    /**
+     * Get usersFavorites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsersFavorites()
+    {
+        return $this->users_favorites;
     }
 }

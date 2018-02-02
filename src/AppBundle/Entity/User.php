@@ -117,12 +117,20 @@ class User implements UserInterface, \Serializable
      */
     private $pokemons_favorites;
 
+    /**
+     * Many Users have Many Articles.
+     * @ManyToMany(targetEntity="Article", inversedBy="basket_users")
+     * @JoinTable(name="basket")
+     */
+    private $basket_article;
+
 
 
     public function __construct()
     {
         $this->pokemons_favorites = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->basket_article = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
         $this->sale = 0;
@@ -449,5 +457,39 @@ class User implements UserInterface, \Serializable
     public function getPokemonsFavorites()
     {
         return $this->pokemons_favorites;
+    }
+
+    /**
+     * Add basketArticle
+     *
+     * @param \AppBundle\Entity\Article $basketArticle
+     *
+     * @return User
+     */
+    public function addBasketArticle(\AppBundle\Entity\Article $basketArticle)
+    {
+        $this->basket_article[] = $basketArticle;
+
+        return $this;
+    }
+
+    /**
+     * Remove basketArticle
+     *
+     * @param \AppBundle\Entity\Article $basketArticle
+     */
+    public function removeBasketArticle(\AppBundle\Entity\Article $basketArticle)
+    {
+        $this->basket_article->removeElement($basketArticle);
+    }
+
+    /**
+     * Get basketArticle
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBasketArticle()
+    {
+        return $this->basket_article;
     }
 }

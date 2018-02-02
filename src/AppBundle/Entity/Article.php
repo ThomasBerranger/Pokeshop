@@ -3,8 +3,10 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -92,6 +94,12 @@ class Article
      */
     private $createdAt;
 
+    /**
+     * Many Articles have Many Users.
+     * @ManyToMany(targetEntity="User", mappedBy="basket_article")
+     */
+    private $basket_users;
+
 
     /**
      * Constructor
@@ -99,6 +107,7 @@ class Article
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->basket_users = new ArrayCollection();
     }
 
 
@@ -302,5 +311,39 @@ class Article
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Add basketUser
+     *
+     * @param \AppBundle\Entity\User $basketUser
+     *
+     * @return Article
+     */
+    public function addBasketUser(\AppBundle\Entity\User $basketUser)
+    {
+        $this->basket_users[] = $basketUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove basketUser
+     *
+     * @param \AppBundle\Entity\User $basketUser
+     */
+    public function removeBasketUser(\AppBundle\Entity\User $basketUser)
+    {
+        $this->basket_users->removeElement($basketUser);
+    }
+
+    /**
+     * Get basketUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBasketUsers()
+    {
+        return $this->basket_users;
     }
 }

@@ -58,7 +58,6 @@ class Pokemon
      */
     private $articles;
 
-
     /**
      * Many Pokemons have Many Users.
      * @ManyToMany(targetEntity="User", mappedBy="pokemons_favorites")

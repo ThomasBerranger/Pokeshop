@@ -28,6 +28,12 @@ class MenuController extends Controller
      */
     public function basketAction()
     {
-        return $this->render('menu/basket.html.twig');
+        $user = $this->getUser();
+
+        $articles = $user->getBasketArticle();
+
+        return $this->render('menu/basket.html.twig', array(
+            "articles" => $articles
+        ));
     }
 }

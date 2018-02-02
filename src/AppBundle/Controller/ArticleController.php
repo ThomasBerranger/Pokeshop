@@ -8,6 +8,8 @@ use AppBundle\Form\ArticleType;
 use AppBundle\Service\FileUploader;
 use AppBundle\Service\PokeApi;
 use AppBundle\Service\Service;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\PDOException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,6 +97,25 @@ class ArticleController extends Controller
         return $this->redirectToRoute('article_list');
     }
 
+
+
+    /**
+     * @Route("/article/add_basket/{id}", name="article_add_basket")
+     */
+    public function addBasketAction(Article $article, Service $service)
+    {
+        $user = $this->getUser()->addBasketArticle($article);
+
+        try {
+            $service->persistAndFlush($user);
+        }
+        catch (DBALException $e){
+            $this->addFlash('error', 'It seems you already have this article in your basket');
+            return $this->redirectToRoute('article_details', array('id' => $article->getId()));
+        }
+
+        return $this->redirectToRoute('basket');
+    }
 
 
 
