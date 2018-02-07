@@ -88,12 +88,13 @@ class ArticleController extends Controller
     /**
      * @Route("/article/delete/{id}", name="article_delete")
      */
-    public function deleteAction($id, Service $service)
+    public function deleteAction(Article $article, Service $service)
     {
         $fs = new Filesystem();
-        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
-        $fs->remove(array('symlink', './../web/uploads/articles_pictures/'.$article->getPicture(), 'activity.log'));
-        $service->removeAndFlush($article);
+        dump($article);die;
+
+        //$fs->remove(array('symlink', './../web/uploads/articles_pictures/'.$article->getPicture(), 'activity.log'));
+        //$service->removeAndFlush($article);
         return $this->redirectToRoute('article_list');
     }
 

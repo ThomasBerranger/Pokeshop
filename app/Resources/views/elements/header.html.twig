@@ -33,16 +33,16 @@
         {% if homeNavbar is defined %}
             <div class="view intro hm-purple-light">
                 <div class="full-bg-img flex-center">
-                    <div class="container text-center white-text fadeInDownBig animated">
+                    <div class="container text-center white-text fadeInDownBig animated home-text">
                         <h2 class="font-quicksand h2-responsive">Welcome on Pokeshop !</h2>
                         <br>
                         <h5 class="font-didact h5-responsive">Pokeshop allow you to sale and buy any pokemons</h5>
                         <div class="divider-new font-quicksand h5-responsive">Buy them all !</div>
                         <a href="{{ path('article_add') }}" role="button" class="btn btn-primary font-quicksand btn-size">Sale your pokemon here</a>
                         <a href="{{ path('article_list') }}" role="button" class="btn btn-secondary font-quicksand btn-size">See all that we have</a>
-                        <a class='js-scrollTo icon-scroll' href="#scroll"></a>
                     </div>
                 </div>
+                <a class='js-scrollTo icon-scroll' href="#scroll"></a>
             </div>
         {% endif %}
 
