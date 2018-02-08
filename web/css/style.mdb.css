@@ -1,6 +1,6 @@
 .view {
-    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg") no-repeat;
-    background-size: auto;
+    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg") no-repeat center center;
+    background-size: cover;
 }
 
 .view-list {
