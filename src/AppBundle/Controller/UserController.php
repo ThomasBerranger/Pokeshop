@@ -6,10 +6,8 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Service\Service;
-use Doctrine\DBAL\DBALException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -33,7 +31,9 @@ class UserController extends Controller
 
             $service->persistAndFlush($user);
 
-            return $this->redirectToRoute('homepage');
+            $this->addFlash('user_edited', 'Profil successfully edited');
+
+            return $this->redirectToRoute('user_edit');
         }
 
         return $this->render('user/edit.html.twig', array(

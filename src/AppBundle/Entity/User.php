@@ -5,9 +5,11 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -94,20 +96,6 @@ class User implements UserInterface, \Serializable
     private $articles;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="sale", type="integer")
-     */
-    private $sale;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="purchase", type="integer")
-     */
-    private $purchase;
-
-    /**
      * Many Users have Many Pokemons.
      * @ManyToMany(targetEntity="Pokemon", inversedBy="users_favorites")
      * @JoinTable(name="users_pokemons_favorites")
@@ -121,17 +109,21 @@ class User implements UserInterface, \Serializable
      */
     private $basket_article;
 
+    /**
+     * One User has Many Historical.
+     * @OneToMany(targetEntity="Historical", mappedBy="user")
+     */
+    private $historical;
 
 
     public function __construct()
     {
+        $this->historical = new ArrayCollection();
         $this->pokemons_favorites = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->isActive = true;
         $this->money = 100;
-        $this->sale = 0;
-        $this->purchase = 0;
     }
 
 
@@ -172,9 +164,7 @@ class User implements UserInterface, \Serializable
             $this->email,
             $this->isActive,
             $this->money,
-            $this->picture,
-            $this->sale,
-            $this->purchase,
+            $this->picture
         ));
     }
 
@@ -189,8 +179,6 @@ class User implements UserInterface, \Serializable
             $this->isActive,
             $this->money,
             $this->picture,
-            $this->sale,
-            $this->purchase,
             ) = unserialize($serialized);
     }
 
@@ -340,54 +328,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set sale
-     *
-     * @param integer $sale
-     *
-     * @return User
-     */
-    public function setSale($sale)
-    {
-        $this->sale = $sale;
-
-        return $this;
-    }
-
-    /**
-     * Get sale
-     *
-     * @return integer
-     */
-    public function getSale()
-    {
-        return $this->sale;
-    }
-
-    /**
-     * Set purchase
-     *
-     * @param integer $purchase
-     *
-     * @return User
-     */
-    public function setPurchase($purchase)
-    {
-        $this->purchase = $purchase;
-
-        return $this;
-    }
-
-    /**
-     * Get purchase
-     *
-     * @return integer
-     */
-    public function getPurchase()
-    {
-        return $this->purchase;
-    }
-
-    /**
      * Add article
      *
      * @param \AppBundle\Entity\Article $article
@@ -463,7 +403,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function addBasketArticle(\AppBundle\Entity\Article $basketArticle)
+    public function addBasketArticle(Article $basketArticle)
     {
         $this->basket_article[] = $basketArticle;
 
@@ -475,7 +415,7 @@ class User implements UserInterface, \Serializable
      *
      * @param \AppBundle\Entity\Article $basketArticle
      */
-    public function removeBasketArticle(\AppBundle\Entity\Article $basketArticle)
+    public function removeBasketArticle(Article $basketArticle)
     {
         $this->basket_article->removeElement($basketArticle);
     }
@@ -488,5 +428,40 @@ class User implements UserInterface, \Serializable
     public function getBasketArticle()
     {
         return $this->basket_article;
+    }
+
+
+    /**
+     * Add historical
+     *
+     * @param \AppBundle\Entity\Historical $historical
+     *
+     * @return User
+     */
+    public function addHistorical(\AppBundle\Entity\Historical $historical)
+    {
+        $this->historical[] = $historical;
+
+        return $this;
+    }
+
+    /**
+     * Remove historical
+     *
+     * @param \AppBundle\Entity\Historical $historical
+     */
+    public function removeHistorical(\AppBundle\Entity\Historical $historical)
+    {
+        $this->historical->removeElement($historical);
+    }
+
+    /**
+     * Get historical
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHistorical()
+    {
+        return $this->historical;
     }
 }
