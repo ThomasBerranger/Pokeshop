@@ -115,10 +115,17 @@ class User implements UserInterface, \Serializable
      */
     private $historical;
 
+    /**
+     * One User has Many Transactions.
+     * @OneToMany(targetEntity="Transaction", mappedBy="user_buy")
+     */
+    private $transactions;
+
 
     public function __construct()
     {
         $this->historical = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
         $this->pokemons_favorites = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->articles = new ArrayCollection();
@@ -463,5 +470,39 @@ class User implements UserInterface, \Serializable
     public function getHistorical()
     {
         return $this->historical;
+    }
+
+    /**
+     * Add transaction
+     *
+     * @param \AppBundle\Entity\Transaction $transaction
+     *
+     * @return User
+     */
+    public function addTransaction(\AppBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \AppBundle\Entity\Transaction $transaction
+     */
+    public function removeTransaction(\AppBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
     }
 }

@@ -14,16 +14,36 @@
                                 {{ message }}
                             </div>
                         {% endfor %}
-                        <h2 class="h1-responsive font-quicksand"> <i class="fa fa-exchange"></i> Your current transaction :</h2>
-                        <h3 class="h3-responsive mx-2">
+                        <h2 class="h1-responsive font-quicksand text-center"> <i class="fa fa-exchange"></i> Your current transaction :</h2>
 
-                        </h3>
+                        <div class="row">
+                            {% for transaction in transactions %}
+                                <div class="col-lg-6 col-md-12 col-sm-12 margin-auto font-quicksand">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('uploads/users_pictures/'~transaction.userSale.picture) }}" alt="{{ transaction.userSale.username }}" class="img-fluid margin-auto rounded-circle py-1" style="max-height: 15vh">
+                                            <h4 class="text-center h4-responsive">{{ transaction.userSale.username|capitalize }}</h4>
+                                        </div>
+                                        <div class="col-md-4" style="margin: auto">
+                                            <h4 class="text-center h4-responsive font-weight-bold">{{ transaction.article|capitalize }} <i class="fa fa-arrow-right"></i></h4>
+                                            <h4 class="text-center h4-responsive font-weight-bold"><i class="fa fa-arrow-left"></i> {{ transaction.money }} $</h4>
+                                            <h5 class="text-center h5-responsive">J - {{ transaction.date|date('d/m/Y') }}</h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('uploads/users_pictures/'~transaction.userBuy.picture) }}" alt="{{ transaction.userBuy.username }}" class="img-fluid margin-auto rounded-circle py-1" style="max-height: 15vh">
+                                            <h4 class="text-center h4-responsive">{{ transaction.userBuy.username|capitalize }}</h4>
+                                        </div>
+                                    </div>
+                                    <hr class="types_favorites_small">
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     <hr>
                     <div class="col-md-12">
                         <hr>
-                        <h2 class="h1-responsive font-quicksand"> <i class="fa fa-star-o"></i> Your favorite pokemon list :</h2>
-                        <h3 class="h3-responsive mx-3">
+                        <h2 class="h1-responsive font-quicksand text-center"> <i class="fa fa-star-o"></i> Your favorite pokemon list :</h2>
+                        <h3 class="h3-responsive mx-3 text-center">
                             {% for pokemon in app.user.pokemonsFavorites %}
                                 <span><a href="#">{{ pokemon.name|capitalize }}</a></span>{% if not loop.last %} - {% endif %}
                             {% endfor %}

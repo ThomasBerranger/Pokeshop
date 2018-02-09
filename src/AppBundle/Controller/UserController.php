@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Transaction;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Service\Service;
@@ -22,6 +23,8 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
+        $transactions = $this->getDoctrine()->getRepository(Transaction::class)->findTransaction($user);
+
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
@@ -38,7 +41,8 @@ class UserController extends Controller
 
         return $this->render('user/edit.html.twig', array(
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
+            'transactions' => $transactions
         ));
     }
 
@@ -85,9 +89,29 @@ class UserController extends Controller
 
         $this->addFlash('fav_add', 'Successfully removed to your favorite list');
 
-        return $this->redirectToRoute('article_details',  array(
+        return $this->redirectToRoute('article_details', array(
             "id" => $article->getId()
         ));
+    }
+
+    /**
+     * @Route("/user/buy", name="user_buy")
+     */
+    public function buyAction(Service $service)
+    {
+        $user = $this->getUser();
+
+        foreach ( $user->getBasketArticle() as $article)
+        {
+            $transaction = new Transaction();
+            $transaction->setUserBuy($user);
+            $transaction->setUserSale($article->getOwner());
+            $transaction->setArticle($article->getPokemon()->getName());
+            $transaction->setMoney($article->getPrice());
+
+            $service->persistAndFlush($transaction);
+        }
+        $this->redirectToRoute('user_edit');
     }
 
 }

@@ -45,13 +45,6 @@ class Historical
     private $pokemon;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="collaborator", type="string", length=50)
-     */
-    private $collaborator;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -149,30 +142,6 @@ class Historical
     }
 
     /**
-     * Set collaborator
-     *
-     * @param string $collaborator
-     *
-     * @return Historical
-     */
-    public function setCollaborator($collaborator)
-    {
-        $this->collaborator = $collaborator;
-
-        return $this;
-    }
-
-    /**
-     * Get collaborator
-     *
-     * @return string
-     */
-    public function getCollaborator()
-    {
-        return $this->collaborator;
-    }
-
-    /**
      * Set date
      *
      * @param \DateTime $date
@@ -194,5 +163,29 @@ class Historical
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Historical
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
