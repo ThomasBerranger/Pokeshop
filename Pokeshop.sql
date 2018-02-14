@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 02 fév. 2018 à 17:07
+-- Généré le :  mer. 14 fév. 2018 à 16:50
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -87,14 +87,40 @@ CREATE TABLE IF NOT EXISTS `basket` (
 --
 
 INSERT INTO `basket` (`user_id`, `article_id`) VALUES
-(13, 15),
 (13, 20),
 (13, 30),
+(13, 31),
 (14, 14),
 (14, 29),
 (19, 31),
 (23, 14),
 (23, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `historical`
+--
+
+DROP TABLE IF EXISTS `historical`;
+CREATE TABLE IF NOT EXISTS `historical` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `money` double NOT NULL,
+  `pokemon` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `user` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_A56FCD038D93D649` (`user`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `historical`
+--
+
+INSERT INTO `historical` (`id`, `type`, `money`, `pokemon`, `date`, `user`) VALUES
+(2, 'sale', 1000, 'bulbi', '2018-02-08 00:00:00', 13),
+(3, 'purchase', 2000, 'charizard', '2018-02-03 00:00:00', 13);
 
 -- --------------------------------------------------------
 
@@ -274,6 +300,35 @@ INSERT INTO `pokemon` (`id`, `number`, `name`, `type1`, `type2`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `transaction`
+--
+
+DROP TABLE IF EXISTS `transaction`;
+CREATE TABLE IF NOT EXISTS `transaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_buy` int(11) DEFAULT NULL,
+  `user_sale` int(11) DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `article` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `money` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_723705D12495E3FC` (`user_buy`),
+  KEY `IDX_723705D19FCA8CCC` (`user_sale`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `transaction`
+--
+
+INSERT INTO `transaction` (`id`, `user_buy`, `user_sale`, `date`, `article`, `money`) VALUES
+(1, 13, 19, '2018-02-09 10:18:24', 'squirtle', 600),
+(2, 13, 23, '2018-02-09 10:18:24', 'alakazam', 3950),
+(3, 13, 23, '2018-02-09 10:18:24', 'dugtrio', 2500),
+(4, 14, 13, '2018-02-08 00:00:00', 'squirtle', 1000);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -286,8 +341,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_active` tinyint(1) NOT NULL,
   `money` int(11) NOT NULL,
   `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sale` int(11) NOT NULL,
-  `purchase` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
@@ -297,11 +350,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `is_active`, `money`, `picture`, `sale`, `purchase`) VALUES
-(13, 'Thomas', '$2y$13$eP5hgvwS4tZ7y1reXL0WSeBn8zfCRSdPTDvSaeHzlCEDGkNWy2Tyy', 'toto@gmail.com', 1, 10000, '134bb54fc695e9e1e6fbd3270ef45b27.png', 0, 0),
-(14, 'Kristen', '$2y$13$qKWNicrGJsfxhF7TSZNykuLn/c2F1fwZaPThm3CcXXuyqcM.qU65y', 'k@gmail.com', 1, 2500, '32b46871e1625ed037200ed4e617dd8b.png', 0, 0),
-(19, 'Jesse', '$2y$13$Hrq2pAwn9ddinus/3BVPM.5Uj50CJ1amOBXpNX6zj9DrO8trqRikS', 'j@gmail.com', 1, 1000, '05fb7b328015897c87a5e20691dfad03.png', 0, 0),
-(23, 'Daisy', '$2y$13$FhubryEl3L4QlcQ.16TUZuBzC/KUeSDhgd0Azt/leHH8vXZy/2UlS', 'd@gmail.com', 1, 100, '2cb3e9a6cf2576a4e7d0cef3c459e296.png', 0, 0);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `is_active`, `money`, `picture`) VALUES
+(13, 'Thomas', '$2y$13$eP5hgvwS4tZ7y1reXL0WSeBn8zfCRSdPTDvSaeHzlCEDGkNWy2Tyy', 'toto@gmail.com', 1, 10000, '134bb54fc695e9e1e6fbd3270ef45b27.png'),
+(14, 'Kristen', '$2y$13$qKWNicrGJsfxhF7TSZNykuLn/c2F1fwZaPThm3CcXXuyqcM.qU65y', 'k@gmail.com', 1, 2500, '32b46871e1625ed037200ed4e617dd8b.png'),
+(19, 'Jesse', '$2y$13$Hrq2pAwn9ddinus/3BVPM.5Uj50CJ1amOBXpNX6zj9DrO8trqRikS', 'j@gmail.com', 1, 1000, '05fb7b328015897c87a5e20691dfad03.png'),
+(23, 'Daisy', '$2y$13$FhubryEl3L4QlcQ.16TUZuBzC/KUeSDhgd0Azt/leHH8vXZy/2UlS', 'd@gmail.com', 1, 100, '2cb3e9a6cf2576a4e7d0cef3c459e296.png');
 
 -- --------------------------------------------------------
 
@@ -354,6 +407,19 @@ ALTER TABLE `article`
 ALTER TABLE `basket`
   ADD CONSTRAINT `FK_2246507B7294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_2246507BA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `historical`
+--
+ALTER TABLE `historical`
+  ADD CONSTRAINT `FK_A56FCD038D93D649` FOREIGN KEY (`user`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `FK_723705D12495E3FC` FOREIGN KEY (`user_buy`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_723705D19FCA8CCC` FOREIGN KEY (`user_sale`) REFERENCES `user` (`id`);
 
 --
 -- Contraintes pour la table `users_pokemons_favorites`
